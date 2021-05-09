@@ -1,0 +1,30 @@
+{
+  "name": "groupomania-api",
+  "version": "1.0.0",
+  "description": "Backend du reseau social interne de l'entreprise Groupomania (Entreprise fictive)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofianeAlamri/sofianeAlamri_7_09052021.git"
+  },
+  "author": "Sofiane AL AMRI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofianeAlamri/sofianeAlamri_7_09052021/issues"
+  },
+  "homepage": "https://github.com/sofianeAlamri/sofianeAlamri_7_09052021#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^9.0.1",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2",
+    "xss-clean": "^0.1.1"
+  }
+}
