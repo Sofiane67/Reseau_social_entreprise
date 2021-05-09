@@ -14,10 +14,8 @@ const Post = sequelize.define("post", {
         allowNull: false
     },
     imageUrl: {
-        id: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        }
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 });
 

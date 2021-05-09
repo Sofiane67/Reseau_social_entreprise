@@ -1,5 +1,6 @@
 const http = require("http");
 const app = require("./app");
+const sequelize = require("./util/database");
 
 //Retourne un port valide qu'il soit fournie sous forme d'une chaine ou d'un nombre
 const normalizePort = val => {
@@ -51,4 +52,4 @@ server.on("listening", () => {
     console.log(`Listening on ${bind}`);
 });
 
-server.listen(port);
+sequelize.sync().then(() => server.listen(port)).catch(err => console.log(err))
