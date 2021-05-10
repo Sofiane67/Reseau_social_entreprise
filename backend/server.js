@@ -52,4 +52,6 @@ server.on("listening", () => {
     console.log(`Listening on ${bind}`);
 });
 
-sequelize.sync().then(() => server.listen(port)).catch(err => console.log(err))
+sequelize.sync(
+    // {force: true}
+    ).then(() => server.listen(port)).catch(err => console.log(err))
