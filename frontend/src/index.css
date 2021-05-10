@@ -1,0 +1,46 @@
+html{
+  font-size: 65.5%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: currentColor;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.6rem;
+  font-weight: 400;
+  display: grid;
+  justify-items: center;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root{
+  width: 100vw;
+  display: grid;
+  justify-items: center;
+}
+
+

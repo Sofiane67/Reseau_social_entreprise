@@ -1,0 +1,9 @@
+.signUp-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__h1{
+        margin: 5rem;
+    }
+}

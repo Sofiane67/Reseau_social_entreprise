@@ -1,0 +1,9 @@
+$breakpoints : (
+    bp-1340: 83.75em
+);
+
+@mixin media-queries($breakpoint){
+    @media only screen and (max-width: $breakpoint){
+        @content;
+    }
+}
