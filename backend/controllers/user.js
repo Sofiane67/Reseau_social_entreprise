@@ -10,6 +10,7 @@ require("dotenv").config();
  * @param {*} next 
  */
 exports.signup = (req, res, next) => {
+    console.log(req.body)
     const { name, firstName, email, password } = req.body;
     bcrypt.hash(password, 10)
     .then(hash => {
@@ -37,11 +38,11 @@ exports.login = (req, res, next) => {
     User.findAll({where: {email: email}})
     .then(([user]) => {
         
-        if (!user) return res.status(401).json({ error: "L'adresse email n'existe pas" });
+        if (!user) return res.status(401).json({ error: "Identifiant invalide" });
 
         bcrypt.compare(password, user.password)
             .then(valid => {
-                if (!valid) return res.status(401).json({ error: "Mot de passe incorrect" });
+                if (!valid) return res.status(401).json({ error: "Identifiant invalide" });
 
                 res.status(200).json({
                     userId: user.id,
