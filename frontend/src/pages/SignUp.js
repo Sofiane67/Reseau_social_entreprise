@@ -6,7 +6,7 @@ import Button from "../components/UI/Button/Button";
 
 import InputContext from "../store/inputValue-context";
 
-import { formFieldsSignUp} from "../utils/formFields";
+import { formFieldsSignUp, getInputValue, onSubmitFormHelper, requestSettings} from "../utils/formFields";
 
 const SignUp = () => {
 
@@ -17,72 +17,40 @@ const SignUp = () => {
     const [user, setUser] = useState("");
     const [formIsSend, setFormIsSend] = useState(false);
 
-    /**
-     * Retourne la valeur du champ name
-     * @param {String} name 
-     * @returns 
-     */
-    const onGetName = name => setName(name);
-    
-    /**
-     * Retourne la valeur du champ firstName
-     * @param {*} firstname 
-     * @returns 
-     */
-    const onGetFirstName = firstname => setFirstName(firstname);
+    //Récupération des valeurs des inputs
+    const onGetName = getInputValue(name, setName);
+    const onGetFirstName = getInputValue(firstName, setFirstName);
+    const onGetEmail = getInputValue(email, setEmail);
+    const onGetPassword = getInputValue(password, setPassword);
 
-    /**
-     * Retourne la valeur du champ email
-     * @param {*} email 
-     * @returns 
-     */
-    const onGetEmail = email => setEmail(email);
-
-    /**
-     * Retourne la valeur du champ password
-     * @param {*} password 
-     * @returns 
-     */
-    const onGetPassword = password => setPassword(password);
-
-    /**
-     * Cette fonction retourne un objet User pour l'envoi de la requête POST
-     * @param {Object} user Contient les données du formulaire sous forme d'objet
-     * @param {Boolean} isSend Retroune True lorsque que le formulaire est soumis
-     */
-    const onSubmitForm = (user, isSend) =>  {
-        setUser(user);
-        setFormIsSend(isSend);
-    }
+    //Retourne un objet User qui sera envoyé dans la requête POST et un Booléen si le formulaire est envoyé ou non
+    const onSubmitForm = onSubmitFormHelper(setUser, setFormIsSend);
 
     //Requête POST : Enregistrement d'un nouvel user
     const sendPostRequest = useHttp();
     useEffect(() => {
         if (formIsSend) {
-            const initReq = {
-                url: "http://localhost:3000/api/auth/signup",
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            }
-            sendPostRequest(initReq);
+
+            const settings = requestSettings("http://localhost:3000/api/auth/signup", user );
+
+            sendPostRequest(settings);
             setFormIsSend(false);
         }
-    },[formIsSend])
+    }, [formIsSend, requestSettings])
 
     return (
-        <InputContext.Provider value = {{value: {
+        <InputContext.Provider value = {{
             name,
             firstName,
             email,
             password
-        }}} >
+        }} >
             <Form onSubmitForm={onSubmitForm}>
-                <FormGroup field={formFieldsSignUp.name} key={formFieldsSignUp.name.id} onGetInputValue={onGetName} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.firstName} key={formFieldsSignUp.firstName.id} onGetInputValue={onGetFirstName} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.email} key={formFieldsSignUp.email.id} onGetInputValue={onGetEmail} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.password} key={formFieldsSignUp.password.id} onGetInputValue={onGetPassword} formIsSend={formIsSend}/>
-                <Button>Valider</Button>
+                <FormGroup field={formFieldsSignUp.name} onGetInputValue={onGetName} formIsSend={formIsSend}/>
+                <FormGroup field={formFieldsSignUp.firstName} onGetInputValue={onGetFirstName} formIsSend={formIsSend}/>
+                <FormGroup field={formFieldsSignUp.email} onGetInputValue={onGetEmail} formIsSend={formIsSend}/>
+                <FormGroup field={formFieldsSignUp.password} onGetInputValue={onGetPassword} formIsSend={formIsSend}/>
+                <Button type="submit">Valider</Button>
             </Form>
         </InputContext.Provider>
     );

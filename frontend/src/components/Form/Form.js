@@ -4,9 +4,11 @@ import classes from "./Form.module.scss";
 
 const Form = props => {
     const ctx = useContext(InputContext);
+    
     const submitFormHandler = e => {
         e.preventDefault();
-        props.onSubmitForm(ctx.value, true)
+        props.onSubmitForm(ctx, true)
+        console.log(ctx)
     }
 
     return (

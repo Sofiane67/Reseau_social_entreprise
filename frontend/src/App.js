@@ -8,7 +8,6 @@ import Navigation from "./components/layout/Navigation/Navigation";
 const App = () => {
     return (
         <Wrapper>
-
             <Header>
                 <Navigation/>
             </Header>
