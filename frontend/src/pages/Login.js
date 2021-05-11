@@ -4,10 +4,6 @@ import Button from "../components/UI/Button/Button";
 
 import {formFieldLogin} from "../utils/formFields";
 
-const field = {
-
-}
-
 const Login = () => {
     return (
         <Form>

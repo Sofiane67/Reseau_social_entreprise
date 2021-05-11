@@ -1,3 +1,4 @@
+import {memo} from "react"
 import Input from "../UI/Input/Input";
 import classes from "./FormGroup.module.scss";
 
@@ -10,13 +11,13 @@ const FormGroup = props => {
         name,
         id
     } = props.field;
-
+ 
     return (
         <div className={classes["form__group"]}>
             <label htmlFor={htmlFor} className={classes["form__label"]}>{label}</label>
-            <Input type={type} name={name} id={id} className="form__input"/>
+            <Input type={type} name={name} id={id} className="form__input" onGetInputValue={props.onGetInputValue} formIsSend={props.formIsSend}/>
         </div>
     );
 }
 
-export default FormGroup;
+export default memo(FormGroup);

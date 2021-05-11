@@ -32,7 +32,7 @@ const limiter = rateLimit({
 //Définit des en-tête HTTP sécurisés
 app.use(helmet());
 
-app.use("/", limiter);
+// app.use("/", limiter);
 
 app.use(express.json());
 
