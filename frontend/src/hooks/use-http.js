@@ -1,4 +1,9 @@
+import {useState} from "react";
+
 const useHttp = () => {
+
+    const [returnData, setRetrunData] = useState(null);
+
     const sendRequest = async requestConfig => {
         try {
             const res = await fetch(
@@ -11,8 +16,9 @@ const useHttp = () => {
             if(!res.ok) throw new Error("La requête a échouée");
 
             const data = await res.json();
-            console.log(data);
-
+            setRetrunData(data);
+            return returnData
+            
         } catch (error) {
             console.log(error.message)
         }
