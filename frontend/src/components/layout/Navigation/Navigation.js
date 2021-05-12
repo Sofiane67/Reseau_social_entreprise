@@ -1,19 +1,23 @@
 import { Fragment } from "react";
-import {NavLink} from "react-router-dom";
+import LinkNav from "../../UI/Link/LinkNav";
 
 import classes from "./Navigation.module.scss";
 
-const Navigation = () => {
+
+const Navigation = props => {
     return (
         <Fragment>
             <nav className={classes.nav}>
                 <ul className={classes["nav__list"]}>
-                    <li className={classes["nav__item"]}>
-                        <NavLink className={classes["nav__link"]} activeClassName={classes["nav__link--active"]} to="/signup">Inscription</NavLink>
-                    </li>
-                    <li className={classes["nav__item"]}>
-                        <NavLink className={classes["nav__link"]} activeClassName={classes["nav__link--active"]} to="login">Connexion</NavLink>
-                    </li>
+                    {
+                        props.path.map(link => {
+                            return (
+                                <li key={link.name} className={classes["nav__item"]}>
+                                    <LinkNav path={link.path} >{link.name}</LinkNav>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </nav>
         </Fragment>

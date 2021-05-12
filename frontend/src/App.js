@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 import Wrapper from "./components/layout/Wrapper/Wrapper";
 import Login from "./pages/Login";
@@ -7,14 +7,26 @@ import Home from "./pages/Home";
 import Header from "./components/layout/Header/Header";
 import Navigation from "./components/layout/Navigation/Navigation";
 import AuthContext from "./store/auth-context";
+import {logoutNav, loginNav} from "./utils/navigation";
 
 
 const App = () => {
+
     const authCtx = useContext(AuthContext);
+
+    const [path, setPath] = useState(logoutNav);
+
+    useEffect(() => {
+        if(authCtx.isLoggedIn){
+            setPath(loginNav)
+        }
+
+    }, [authCtx]);
+
     return (
         <Wrapper>
             <Header>
-                <Navigation/>
+                <Navigation path={path}/>
             </Header>
             <Switch>
                 <Route path="/login">
