@@ -36,7 +36,7 @@ const SignUp = () => {
             sendPostRequest(settings);
             setFormIsSend(false);
         }
-    }, [formIsSend, requestSettings])
+    }, [formIsSend, sendPostRequest, user])
 
     return (
         <InputContext.Provider value = {{

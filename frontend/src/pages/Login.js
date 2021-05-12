@@ -1,23 +1,24 @@
-import {useState, useEffect} from "react";
-import {useHistory} from "react-router-dom";
+import {useState, useEffect, useContext} from "react";
+import {useHistory} from "react-router-dom"
 import useHttp from "../hooks/use-http";
 import Form from "../components/Form/Form";
 import FormGroup from "../components/FormGroup/FormGroup";
 import Button from "../components/UI/Button/Button";
 
 import InputContext from "../store/inputValue-context";
+import AuthContext from "../store/auth-context";
 
 import { formFieldLogin, getInputValue, onSubmitFormHelper, requestSettings} from "../utils/formFields";
 
 const Login = () => {
-    const history = useHistory();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [connectionInfo, setConnectionInfo] = useState("");
     const [formIsSend, setFormIsSend] = useState(false);
-    const [token, setToken] = useState(true);
-    
+    const [token, setToken] = useState("");
+    const history = useHistory();
+    const authCtx = useContext(AuthContext);
+
     //Récupération des valeurs des inputs
     const onGetEmail = getInputValue(email,setEmail);
     const onGetPassword = getInputValue(password, setPassword);
@@ -35,12 +36,13 @@ const Login = () => {
 
             //Enregistrement du token dans le localStorage
             tokenReturned.then(userToken => {
-                setToken(userToken)
-                localStorage.setItem("token", JSON.stringify(token))
+                setToken(userToken);
+                authCtx.login(userToken);
+                history.push('/home');
             });
         }
-    }, [formIsSend, requestSettings, token])
-   
+    }, [formIsSend, token, connectionInfo, sendPostRequest, authCtx, history])
+
     return (
         <InputContext.Provider value={{
             email,
