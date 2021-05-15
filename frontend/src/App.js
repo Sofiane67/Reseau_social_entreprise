@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect} from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 import Wrapper from "./components/layout/Wrapper/Wrapper";
 import Login from "./pages/Login";
@@ -13,20 +13,23 @@ import {logoutNav, loginNav} from "./utils/navigation";
 const App = () => {
 
     const authCtx = useContext(AuthContext);
-
     const [path, setPath] = useState(logoutNav);
 
     useEffect(() => {
         if(authCtx.isLoggedIn){
-            setPath(loginNav)
-        }
+            setPath(loginNav);
+        };
+
+        if (!authCtx.isLoggedIn) {
+            setPath(logoutNav);
+        };
 
     }, [authCtx]);
 
     return (
         <Wrapper>
             <Header>
-                <Navigation path={path}/>
+                <Navigation path={path} clickEvent={path === loginNav? authCtx.logout:null}/>
             </Header>
             <Switch>
                 <Route path="/login">
@@ -40,7 +43,8 @@ const App = () => {
                     {!authCtx.isLoggedIn && <Redirect to="/"/>}
                 </Route>
                 <Route path="/">
-                    <Redirect to="/login"/>
+                    {authCtx.isLoggedIn && <Redirect to="/home" />}
+                    {!authCtx.isLoggedIn && <Redirect to="/login" />}
                 </Route>
             </Switch>
         </Wrapper>

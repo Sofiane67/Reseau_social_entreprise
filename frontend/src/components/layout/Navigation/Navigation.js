@@ -13,7 +13,7 @@ const Navigation = props => {
                         props.path.map(link => {
                             return (
                                 <li key={link.name} className={classes["nav__item"]}>
-                                    <LinkNav path={link.path} >{link.name}</LinkNav>
+                                    <LinkNav path={link.path} clickEvent={props.clickEvent}>{link.name}</LinkNav>
                                 </li>
                             )
                         })

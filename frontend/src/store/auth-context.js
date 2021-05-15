@@ -23,13 +23,19 @@ export const AuthContextProvider = props => {
         setUserId(tokenData.userId);
         setToken(tokenData.token);
         localStorage.setItem("token", JSON.stringify(tokenData));
+    };
+
+    const logoutHandler = () => {
+        setToken(null)
+        localStorage.removeItem("token");
     }
 
     const contextValue = {
         userId: userId,
         token: token,
         isLoggedIn,
-        login: loginHandler
+        login: loginHandler,
+        logout: logoutHandler
     };
 
     return (
