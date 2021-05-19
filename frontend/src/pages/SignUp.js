@@ -22,7 +22,7 @@ const SignUp = () => {
                 email: userDataStrored.email,
                 password: userDataStrored.password
             }
-            dispatch(signup(user))
+            dispatch(signup(user));
         }
     }, [formIsSended, userDataStrored, dispatch])
     

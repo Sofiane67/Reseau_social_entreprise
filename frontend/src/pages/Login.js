@@ -1,47 +1,32 @@
-import {useState, useEffect} from "react";
-import {useHistory} from "react-router-dom"
-import useHttp from "../hooks/use-http";
+import {useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import Form from "../components/Form/Form";
 import FormGroup from "../components/FormGroup/FormGroup";
 import Button from "../components/UI/Button/Button";
-
-import { formFieldLogin, getInputValue, onSubmitFormHelper, requestSettings} from "../utils/formFields";
+import { formFieldLogin} from "../utils/formFields";
+import { GET_EMAIL, GET_PASSWORD } from "../redux/actions/form/type";
+import {login} from "../redux/actions/login/actions";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [connectionInfo, setConnectionInfo] = useState("");
-    const [formIsSend, setFormIsSend] = useState(false);
-    const [token, setToken] = useState("");
-    const history = useHistory();
 
-    //Récupération des valeurs des inputs
-    const onGetEmail = getInputValue(email,setEmail);
-    const onGetPassword = getInputValue(password, setPassword);
+    const loginState = useSelector(state => state.formInputValue);
+    const formIsSended = useSelector(state => state.formInputValue.isSend);
+    const dispatch = useDispatch();
 
-    //Retourne un objet User qui sera envoyé dans la requête POST et un Booléen si le formulaire est envoyé ou non
-    const onSubmitForm = onSubmitFormHelper(setConnectionInfo, setFormIsSend);
-
-    //Requête POST : Login => Vérification des identifiants de connexion
-    const sendPostRequest = useHttp();
     useEffect(() => {
-        if(formIsSend){
-            const settings = requestSettings("http://localhost:3000/api/auth/login", connectionInfo);
-            const tokenReturned = sendPostRequest(settings);
-            setFormIsSend(false);
-
-            //Enregistrement du token dans le localStorage
-            tokenReturned.then(userToken => {
-                setToken(userToken);
-                history.push('/home');
-            });
+        if (formIsSended) {
+            const user = {
+                email: loginState.email,
+                password: loginState.password
+            }
+            dispatch(login(user));
         }
-    }, [formIsSend, token, connectionInfo, sendPostRequest, history])
+    }, [formIsSended, loginState, dispatch]);
 
     return (
-        <Form onSubmitForm={onSubmitForm}>
-            <FormGroup field={formFieldLogin.email} onGetInputValue={onGetEmail} formIsSend={formIsSend}/>
-            <FormGroup field={formFieldLogin.password} onGetInputValue={onGetPassword} formIsSend={formIsSend}/>
+        <Form>
+            <FormGroup field={formFieldLogin.email} action={GET_EMAIL}/>
+            <FormGroup field={formFieldLogin.password} action={GET_PASSWORD}/>
             <Button type="submit">Valider</Button>
         </Form>
     );
