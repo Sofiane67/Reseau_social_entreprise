@@ -1,4 +1,4 @@
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import {GuardedRoute, GuardProvider} from "react-router-guards"
 import {requireLogin} from "./guards/required-login";
 import Wrapper from "./components/layout/Wrapper/Wrapper";
@@ -24,8 +24,11 @@ const App = () => {
                     <Route path="/signup">
                         <SignUp />
                     </Route>
-                    <GuardedRoute path="/" component={Home} guards={[requireLogin]} meta={{auth:true}}/>
-                    <GuardedRoute path="/" component={Login} guards={[requireLogin]} meta={{ auth: false }} />
+                    <GuardedRoute path="/" exact component={Home} guards={[requireLogin]} meta={{auth:true}}/>
+                    <GuardedRoute path="/login" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
+                    <Route path="/logout">
+                        <Redirect to="/"/>
+                    </Route>
                 </Switch>
             </GuardProvider>
         </Wrapper>

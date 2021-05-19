@@ -20,9 +20,9 @@ export const login = (state= initialState, action) => {
         case LOGOUT:
             newState = {
                 ...state,
-                isLoggedIn: action.value.isLoggedIn,
-                token: action.value.token,
-                userId: action.value.userId
+                isLoggedIn: false,
+                token: null,
+                userId: null
             }
             break;
     
