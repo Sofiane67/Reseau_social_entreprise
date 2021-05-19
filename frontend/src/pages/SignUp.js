@@ -1,58 +1,39 @@
-import {useState, useEffect} from "react";
-import useHttp from "../hooks/use-http";
+import {useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import Form from "../components/Form/Form";
 import FormGroup from "../components/FormGroup/FormGroup";
 import Button from "../components/UI/Button/Button";
 
-import InputContext from "../store/inputValue-context";
-
-import { formFieldsSignUp, getInputValue, onSubmitFormHelper, requestSettings} from "../utils/formFields";
+import { formFieldsSignUp} from "../utils/formFields";
+import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD} from "../redux/actions/form/type";
+import {signup} from "../redux/actions/form/actions";
 
 const SignUp = () => {
 
-    const [name, setName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState("");
-    const [formIsSend, setFormIsSend] = useState(false);
+    const dispatch = useDispatch();
+    const userDataStrored = useSelector(state => state.formInputValue);
+    const formIsSended = useSelector(state => state.formInputValue.isSend);
 
-    //Récupération des valeurs des inputs
-    const onGetName = getInputValue(name, setName);
-    const onGetFirstName = getInputValue(firstName, setFirstName);
-    const onGetEmail = getInputValue(email, setEmail);
-    const onGetPassword = getInputValue(password, setPassword);
-
-    //Retourne un objet User qui sera envoyé dans la requête POST et un Booléen si le formulaire est envoyé ou non
-    const onSubmitForm = onSubmitFormHelper(setUser, setFormIsSend);
-
-    //Requête POST : Enregistrement d'un nouvel user
-    const sendPostRequest = useHttp();
     useEffect(() => {
-        if (formIsSend) {
-
-            const settings = requestSettings("http://localhost:3000/api/auth/signup", user );
-
-            sendPostRequest(settings);
-            setFormIsSend(false);
+        if (formIsSended) {
+            const user = {
+                name: userDataStrored.name,
+                firstName: userDataStrored.firstName,
+                email: userDataStrored.email,
+                password: userDataStrored.password
+            }
+            dispatch(signup(user))
         }
-    }, [formIsSend, sendPostRequest, user])
-
+    }, [formIsSended, userDataStrored, dispatch])
+    
     return (
-        <InputContext.Provider value = {{
-            name,
-            firstName,
-            email,
-            password
-        }} >
-            <Form onSubmitForm={onSubmitForm}>
-                <FormGroup field={formFieldsSignUp.name} onGetInputValue={onGetName} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.firstName} onGetInputValue={onGetFirstName} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.email} onGetInputValue={onGetEmail} formIsSend={formIsSend}/>
-                <FormGroup field={formFieldsSignUp.password} onGetInputValue={onGetPassword} formIsSend={formIsSend}/>
-                <Button type="submit">Valider</Button>
-            </Form>
-        </InputContext.Provider>
+        <Form>
+            <FormGroup field={formFieldsSignUp.name} action={GET_NAME}/>
+            <FormGroup field={formFieldsSignUp.firstName} action={GET_FIRSTNAME}/>
+            <FormGroup field={formFieldsSignUp.email} action={GET_EMAIL}/>
+            <FormGroup field={formFieldsSignUp.password} action={GET_PASSWORD}/>
+            <Button type="submit">Valider</Button>
+        </Form>
     );
 };
 

@@ -15,7 +15,7 @@ const FormGroup = props => {
     return (
         <div className={classes["form__group"]}>
             <label htmlFor={htmlFor} className={classes["form__label"]}>{label}</label>
-            <Input type={type} name={name} id={id} className="form__input" onGetInputValue={props.onGetInputValue} formIsSend={props.formIsSend}/>
+            <Input type={type} name={name} id={id} className="form__input" action={props.action}/>
         </div>
     );
 }

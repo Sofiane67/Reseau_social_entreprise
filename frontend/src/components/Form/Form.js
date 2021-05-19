@@ -1,14 +1,15 @@
-import  {memo, useContext} from "react";
-import InputContext from "../../store/inputValue-context";
+import  {memo} from "react";
+import {useDispatch} from "react-redux";
 import classes from "./Form.module.scss";
+import { FORM_IS_SENDED} from "../../redux/actions/form/type";
 
 const Form = props => {
-    const ctx = useContext(InputContext);
-    
+
+    const dispatch = useDispatch();
+
     const submitFormHandler = e => {
         e.preventDefault();
-        props.onSubmitForm(ctx, true)
-        console.log(ctx)
+        dispatch({ type: FORM_IS_SENDED, isSend: true});
     }
 
     return (

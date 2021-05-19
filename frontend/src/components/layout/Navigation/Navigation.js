@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import LinkNav from "../../UI/Link/LinkNav";
+import {NavLink} from "react-router-dom";
 
 import classes from "./Navigation.module.scss";
 
@@ -9,15 +9,12 @@ const Navigation = props => {
         <Fragment>
             <nav className={classes.nav}>
                 <ul className={classes["nav__list"]}>
-                    {
-                        props.path.map(link => {
-                            return (
-                                <li key={link.name} className={classes["nav__item"]}>
-                                    <LinkNav path={link.path} clickEvent={props.clickEvent}>{link.name}</LinkNav>
-                                </li>
-                            )
-                        })
-                    }
+                    <li className={classes["nav__item"]}>
+                        <NavLink to="/signup" >Inscription</NavLink>
+                    </li>
+                    <li className={classes["nav__item"]}>
+                        <NavLink to="login" >Connexion</NavLink>
+                    </li>
                 </ul>
             </nav>
         </Fragment>
