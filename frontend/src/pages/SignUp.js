@@ -13,6 +13,7 @@ const SignUp = () => {
     const dispatch = useDispatch();
     const userDataStrored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
+    const errorSignup = useSelector(state => state.formInputValue.error);
 
     useEffect(() => {
         if (formIsSended) {
@@ -33,6 +34,7 @@ const SignUp = () => {
             <FormGroup field={formFieldsSignUp.email} action={GET_EMAIL}/>
             <FormGroup field={formFieldsSignUp.password} action={GET_PASSWORD}/>
             <Button type="submit">Valider</Button>
+            <p>{errorSignup && errorSignup}</p>
         </Form>
     );
 };

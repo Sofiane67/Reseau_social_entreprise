@@ -1,4 +1,4 @@
-import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD, FORM_IS_SENDED} from "../../actions/form/type";
+import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD, FORM_IS_SENDED, ERROR} from "../../actions/form/type";
 
 const initialState = {};
 
@@ -34,6 +34,12 @@ export const formInputValue = (state = initialState, action) => {
             newState = {
                 ...state,
                 isSend: action.isSend,
+            }
+            break;
+        case ERROR:
+            newState = {
+                ...state,
+                error: action.message
             }
             break;
         default:

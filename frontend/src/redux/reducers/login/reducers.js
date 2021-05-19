@@ -1,9 +1,9 @@
-import  {LOGIN, LOGOUT} from "../../actions/login/types";
+import  {LOGIN, LOGOUT, ERROR} from "../../actions/login/types";
 
 const initialState = {
     isLoggedIn: false,
     token: null,
-    userId: null
+    userId: null,
 };
 
 export const login = (state= initialState, action) => {
@@ -25,7 +25,6 @@ export const login = (state= initialState, action) => {
                 userId: null
             }
             break;
-    
         default:
             return state;
     }

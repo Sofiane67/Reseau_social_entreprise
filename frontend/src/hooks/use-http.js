@@ -9,13 +9,19 @@ const useHttp = () => {
                     body: requestConfig.body
                 }
             );
-            if(!res.ok) throw new Error("La requête a échouée");
-
             const data = await res.json();
+            
+            if (data.error.errors[0].message === "users.email must be unique") {
+                return { errorMessage: "Cette adresse email est déja utilisée" };
+            }
+
+            if(data.error) throw new Error(data.error);
+            
+            
             return data;
             
         } catch (error) {
-            console.log(error.message)
+            return {error: error.message};
         }
     }
 

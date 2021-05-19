@@ -13,6 +13,8 @@ const Login = () => {
     const loginState = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
+    const errorLogin = useSelector(state => state.formInputValue.error);
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,6 +36,7 @@ const Login = () => {
             <FormGroup field={formFieldLogin.email} action={GET_EMAIL}/>
             <FormGroup field={formFieldLogin.password} action={GET_PASSWORD}/>
             <Button type="submit">Valider</Button>
+            <p>{errorLogin && errorLogin}</p>
         </Form>
     );
 };
