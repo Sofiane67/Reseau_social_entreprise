@@ -9,7 +9,7 @@ import {login} from "./reducers/login/reducers";
 const migrations = {
     1: state => ({
         ...state
-    }, console.log(state))
+    })
 }
 
 const persistConfig = {

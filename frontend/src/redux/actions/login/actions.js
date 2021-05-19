@@ -10,12 +10,12 @@ export const login = userDataConnect => {
         response().then(data =>{
             dispatch({
                 type: LOGIN, value: {
-                    isLoggedIn: true,
+                    isLoggedIn: !!data.token,
                     token: data.token,
                     userId: data.userId
                 }
             });
-            dispatch({ type: FORM_IS_SENDED, isSend: false })
+            dispatch({ type: FORM_IS_SENDED, isSend: false });
         })
         
     }
