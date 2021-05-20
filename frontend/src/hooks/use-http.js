@@ -10,13 +10,13 @@ const useHttp = () => {
                 }
             );
             const data = await res.json();
-            
-            if (data.error.errors[0].message === "users.email must be unique") {
-                return { errorMessage: "Cette adresse email est déja utilisée" };
-            }
-
-            if(data.error) throw new Error(data.error);
-            
+            let errorMessage;
+            // if (data.error.errors){
+            //     errorMessage = data.error.errors[0].message
+            // }else{
+            //     errorMessage = data.error
+            // }
+            // if (errorMessage) throw new Error(errorMessage);
             
             return data;
             
@@ -29,3 +29,5 @@ const useHttp = () => {
 }
 
 export default useHttp;
+
+//soso@gmail.com

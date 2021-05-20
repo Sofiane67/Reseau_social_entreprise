@@ -12,7 +12,7 @@ const Comment = require("./models/comment");
 const Sharing = require("./models/sharing");
 
 const userRoutes = require("./routes/user");
-
+const postRoutes = require("./routes/post");
 const app = express();
 
 app.use((req, res, next) => {
@@ -21,6 +21,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
     next();
 });
+
 
 //Limitation du nombre de requête par IP
 const limiter = rateLimit({
@@ -39,7 +40,35 @@ app.use(express.json());
 //Protection contre les attaques XSS
 app.use(xssClean());
 
+
+
+//****************************************************************************************************************************
+        //A SUPPRIMER EN PROD
+//****************************************************************************************************************************
+
+// app.post("/api/forum", (req, res, next) => {
+//     const forumType = req.body.forumType;
+//     Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
+// });
+
+// app.post("/api/role", (req, res, next) => {
+//     const roleName = req.body.roleName;
+//     Role.create({ roleName }).then(() => res.status(201).json({ message: "nouveau role créé" })).catch(err => res.status(500).json({ err }))
+// })
+
+// app.use((req, res, next) => {
+//     User.findByPk(1).then(user => {
+//         req.user = user;
+//         next();
+//     }).catch(err => console.log(err));
+// })
+//****************************************************************************************************************************
+//****************************************************************************************************************************
+
+
+
 app.use("/api/auth", userRoutes);
+app.use("/api/posts", postRoutes);
 
 //INITIALISATION DES ASSOCIATIONS ENTRE TABLES 
 

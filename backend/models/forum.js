@@ -10,7 +10,7 @@ const Forum = sequelize.define("forum", {
         primaryKey: true
     },
     forumType: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 });

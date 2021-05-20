@@ -1,17 +1,19 @@
 import useHttp from "../hooks/use-http";
+import {setHeaders} from "../utils/setHeaders";
 
-export const httpRequest = (url, userData = null) => {
+export const httpRequest = (url, dataBody = null) => {
+    const headers = setHeaders();
     return () => {
         const sendRequest = useHttp();
         
         let settings;
 
-        if(userData){
+        if(dataBody){
             settings = {
                 url,
                 method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userData)
+                headers: headers,
+                body: JSON.stringify(dataBody)
             }
         }else{
             settings = {url};

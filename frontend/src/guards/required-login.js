@@ -2,7 +2,6 @@ import {store} from "../redux"
 
 const isLoggedIn = () => {
     const state = store.getState();
-    console.log(state)
     return state.login.isLoggedIn;
 }
 

@@ -1,4 +1,4 @@
-import  {LOGIN, LOGOUT, ERROR} from "../../actions/login/types";
+import  {LOGIN, LOGOUT} from "../../actions/login/types";
 
 const initialState = {
     isLoggedIn: false,
