@@ -1,27 +1,9 @@
-import {useState, useEffect, memo} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import useInput from "../../../hooks/use-input";
 import classes from "./Input.module.scss";
 
-
 const Input = props => {
-    const [inputValue, setInputValue] = useState("");
-    const dispatch = useDispatch();
-    const formIsSended = useSelector(state => state.formInputValue.isSend);
-    const action = props.action;
 
-    const changeValueHandler = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    useEffect(() => {
-        const timer = setTimeout(() => dispatch({type: action, value: inputValue}), 500);
-
-        if(formIsSended){
-            setInputValue("");
-        }
-
-        return () => clearTimeout(timer)
-    }, [action, dispatch, inputValue, formIsSended]);
+    const { inputValue, changeValueHandler} = useInput(props.action);
 
     return (
         <input 
@@ -36,4 +18,4 @@ const Input = props => {
 }
 
 
-export default memo(Input);
+export default Input;

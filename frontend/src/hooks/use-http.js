@@ -29,5 +29,3 @@ const useHttp = () => {
 }
 
 export default useHttp;
-
-//soso@gmail.com
