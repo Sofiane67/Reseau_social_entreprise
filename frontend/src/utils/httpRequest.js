@@ -13,7 +13,7 @@ export const httpRequest = (url, dataBody = null) => {
                 url,
                 method: "POST",
                 headers: headers,
-                body: JSON.stringify(dataBody)
+                body: JSON.stringify(dataBody) 
             }
         }else{
             settings = {url};
