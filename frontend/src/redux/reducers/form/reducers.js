@@ -1,4 +1,4 @@
-import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD, FORM_IS_SENDED, ERROR} from "../../actions/form/type";
+import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD, GET_POST_TEXT, GET_POST_IMAGE, FORM_IS_SENDED, ERROR} from "../../actions/form/type";
 
 const initialState = {};
 
@@ -28,6 +28,18 @@ export const formInputValue = (state = initialState, action) => {
             newState = {
                 ...state,
                 password: action.value,
+            }
+            break;
+        case GET_POST_TEXT:
+            newState = {
+                ...state,
+                text: action.value,
+            }
+            break;
+        case GET_POST_IMAGE:
+            newState = {
+                ...state,
+                imageUrl: action.value,
             }
             break;
         case FORM_IS_SENDED:

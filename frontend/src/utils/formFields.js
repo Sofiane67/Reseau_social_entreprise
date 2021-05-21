@@ -16,7 +16,7 @@ export const formFieldLogin = {
     }
 };
 
-export const formFieldsSignUp = {
+export const formFieldSignUp = {
     name: {
         htmlFor: "name",
         label: "Nom",
@@ -33,4 +33,19 @@ export const formFieldsSignUp = {
     },
 
     ...formFieldLogin
+};
+
+export const formFieldPost = {
+    text: {
+        name: "text",
+        placeholder: "Quoi de neuf ?"
+    },
+    imageUrl: {
+        name: "imageUrl",
+        type: "url"
+    },
+    imageFile: {
+        name: "imageUrl",
+        type: "file"
+    }
 };

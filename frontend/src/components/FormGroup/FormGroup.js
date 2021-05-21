@@ -3,14 +3,16 @@ import classes from "./FormGroup.module.scss";
 
 const FormGroup = props => {
 
-    const {
-        htmlFor,
-        label,
-    } = props.field;
+    let htmlFor;
+    let label;
+    if(props.field){
+        htmlFor = props.field.htmlFor;
+        label = props.field.label;
+    }
  
     return (
         <div className={classes["form__group"]}>
-            <label htmlFor={htmlFor} className={classes["form__label"]}>{label}</label>
+            {label && <label htmlFor={htmlFor} className={classes["form__label"]}>{label}</label>}
             {props.children}
         </div>
     );
