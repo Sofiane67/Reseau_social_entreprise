@@ -7,26 +7,29 @@ import {useEffect} from "react";
 import Button from "../UI/Button/Button";
 import {formFieldPost} from "../../utils/formFields";
 import {GET_POST_TEXT, GET_POST_IMAGE} from "../../redux/actions/form/type";
-import {useSelector} from "react-redux";
-
+import {useSelector, useDispatch} from "react-redux";
+import {addPost} from "../../redux/actions/form/actions";
 const FormPost = () => {
 
+    const dispatch = useDispatch();
+    const postDataStored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const [isShow, setIsShow] = useState(false);
 
-    const showHandler = () =>{
-        setIsShow(state => !state);
-        
-    };
-
     useEffect(() => {
         if(formIsSended){
+            const post = {
+                text: postDataStored.text,
+                imageUrl: postDataStored.imageUrl ? postDataStored.imageUrl : null
+            }
+            dispatch(addPost(post));
             setIsShow(false);
         }
-    } ,[formIsSended]);
+    } ,[formIsSended, dispatch, postDataStored]);
 
-
-    
+    const showHandler = () => {
+        setIsShow(state => !state);
+    };
 
     return (
             <Form>
