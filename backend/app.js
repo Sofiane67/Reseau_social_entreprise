@@ -3,6 +3,8 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
 
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 const Role = require("./models/role");
 const User = require("./models/user");
@@ -45,7 +47,6 @@ app.use(xssClean());
 //****************************************************************************************************************************
         //A SUPPRIMER EN PROD
 //****************************************************************************************************************************
-
 // app.post("/api/forum", (req, res, next) => {
 //     const forumType = req.body.forumType;
 //     Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
@@ -55,16 +56,24 @@ app.use(xssClean());
 //     const roleName = req.body.roleName;
 //     Role.create({ roleName }).then(() => res.status(201).json({ message: "nouveau role créé" })).catch(err => res.status(500).json({ err }))
 // })
-
-// app.use((req, res, next) => {
-//     User.findByPk(1).then(user => {
-//         req.user = user;
-//         next();
-//     }).catch(err => console.log(err));
-// })
 //****************************************************************************************************************************
 //****************************************************************************************************************************
+let userId;
+app.use((req, res, next) => {
+    if (typeof req.headers.authorization === "string"){
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.SECRET);
+        userId = decodedToken.userId;
+    };
+    next();
+});
 
+app.use((req, res, next) => {
+    User.findByPk(userId).then(user => {
+        req.user = user;
+        next();
+    }).catch(err => console.log(err));
+})
 
 
 app.use("/api/auth", userRoutes);

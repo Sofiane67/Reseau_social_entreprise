@@ -2,7 +2,6 @@ const Post = require("../models/post");
 
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
-    
     req.user.createPost({ ...req.body })
         .then(post =>{ 
             post.setForum(forumId);
