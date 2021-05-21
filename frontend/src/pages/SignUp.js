@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Form from "../components/Form/Form";
 import FormGroup from "../components/FormGroup/FormGroup";
+import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 
 import { formFieldsSignUp} from "../utils/formFields";
@@ -29,10 +30,18 @@ const SignUp = () => {
     
     return (
         <Form>
-            <FormGroup field={formFieldsSignUp.name} action={GET_NAME}/>
-            <FormGroup field={formFieldsSignUp.firstName} action={GET_FIRSTNAME}/>
-            <FormGroup field={formFieldsSignUp.email} action={GET_EMAIL}/>
-            <FormGroup field={formFieldsSignUp.password} action={GET_PASSWORD}/>
+            <FormGroup field={formFieldsSignUp.name}>
+                <Input field={formFieldsSignUp.name} action={GET_NAME} />
+            </FormGroup>
+            <FormGroup field={formFieldsSignUp.firstName} >
+                <Input field={formFieldsSignUp.firstName} action={GET_FIRSTNAME} />
+            </FormGroup>
+            <FormGroup field={formFieldsSignUp.email}>
+                <Input field={formFieldsSignUp.email} action={GET_EMAIL} />
+            </FormGroup>
+            <FormGroup field={formFieldsSignUp.password}>
+                <Input field={formFieldsSignUp.password} action={GET_PASSWORD} />
+            </FormGroup>
             <Button type="submit">Valider</Button>
             <p>{errorSignup && errorSignup}</p>
         </Form>

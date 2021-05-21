@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import Form from "../components/Form/Form";
 import FormGroup from "../components/FormGroup/FormGroup";
+import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 import { formFieldLogin} from "../utils/formFields";
 import { GET_EMAIL, GET_PASSWORD } from "../redux/actions/form/type";
@@ -34,8 +35,12 @@ const Login = () => {
 
     return (
         <Form>
-            <FormGroup field={formFieldLogin.email} action={GET_EMAIL}/>
-            <FormGroup field={formFieldLogin.password} action={GET_PASSWORD}/>
+            <FormGroup field={formFieldLogin.email}>
+                <Input field={formFieldLogin.email} action={GET_EMAIL} />
+            </FormGroup>
+            <FormGroup field={formFieldLogin.password}>
+                <Input field={formFieldLogin.password} action={GET_PASSWORD} />
+            </FormGroup>
             <Button type="submit">Valider</Button>
             <p>{errorLogin && errorLogin}</p>
         </Form>

@@ -4,12 +4,17 @@ import classes from "./Input.module.scss";
 const Input = props => {
 
     const { inputValue, changeValueHandler} = useInput(props.action);
+    const {
+        type,
+        name,
+        id
+    } = props.field;
 
     return (
         <input 
-        type={props.type} 
-        name={props.name} 
-        id={props.id} 
+        type={type} 
+        name={name} 
+        id={id} 
         className={classes["form__input"]} 
         onChange={changeValueHandler}
         value={inputValue}
