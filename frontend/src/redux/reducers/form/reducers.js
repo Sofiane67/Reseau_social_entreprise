@@ -39,7 +39,7 @@ export const formInputValue = (state = initialState, action) => {
         case GET_POST_IMAGE:
             newState = {
                 ...state,
-                imageUrl: action.value,
+                imageUrl: action.value[0],
             }
             break;
         case FORM_IS_SENDED:

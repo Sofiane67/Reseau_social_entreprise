@@ -6,7 +6,13 @@ const useInput = (action) => {
     const dispatch = useDispatch();
     const formIsSended = useSelector(state => state.formInputValue.isSend);
 
-    const changeValueHandler = e => setInputValue(e.target.value);
+    const changeValueHandler = e => {
+        if(e.target.files){
+            setInputValue(e.target.files);
+        }else{
+            setInputValue(e.target.value);
+        }
+    };
 
     useEffect(() => {
         const timer = setTimeout(() => dispatch({type: action, value: inputValue}), 500);

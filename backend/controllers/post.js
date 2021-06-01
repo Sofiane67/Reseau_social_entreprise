@@ -2,6 +2,7 @@ const Post = require("../models/post");
 
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
+    req.body.imageUrl = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`: null;
     req.user.createPost({ ...req.body })
         .then(post =>{ 
             post.setForum(forumId);

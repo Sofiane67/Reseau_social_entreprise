@@ -2,6 +2,7 @@ import {Fragment, useState} from "react";
 import Form from "../Form/Form";
 import FormGroup from "../FormGroup/FormGroup";
 import Input from "../UI/Input/Input";
+import InputFile from "../UI/Input/inputFile/inputFile";
 import Textarea from "../UI/Textarea/Textarea";
 import {useEffect} from "react";
 import Button from "../UI/Button/Button";
@@ -18,11 +19,10 @@ const FormPost = () => {
 
     useEffect(() => {
         if(formIsSended){
-            const post = {
-                text: postDataStored.text,
-                imageUrl: postDataStored.imageUrl ? postDataStored.imageUrl : null
-            }
-            dispatch(addPost(post));
+            const formData = new FormData();
+            formData.append("text", postDataStored.text);
+            if (postDataStored.imageUrl) formData.append("imageUrl", postDataStored.imageUrl);
+            dispatch(addPost(formData));
             setIsShow(false);
         }
     } ,[formIsSended, dispatch, postDataStored]);
@@ -44,7 +44,7 @@ const FormPost = () => {
                             <Input field={formFieldPost.imageUrl} action={GET_POST_IMAGE} />
                         </FormGroup>
                         <FormGroup>
-                            <Input field={formFieldPost.imageFile} action={GET_POST_IMAGE} />
+                            <InputFile field={formFieldPost.imageFile} action={GET_POST_IMAGE} />
                         </FormGroup>
                     </Fragment>
                     )
