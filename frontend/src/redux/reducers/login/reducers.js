@@ -3,7 +3,6 @@ import  {LOGIN, LOGOUT} from "../../actions/login/types";
 const initialState = {
     isLoggedIn: false,
     token: null,
-    userId: null,
 };
 
 export const login = (state= initialState, action) => {
@@ -14,7 +13,6 @@ export const login = (state= initialState, action) => {
                 ...state,
                 isLoggedIn: action.value.isLoggedIn,
                 token: action.value.token, 
-                userId: action.value.userId
             }
             break;
         case LOGOUT:
@@ -22,7 +20,6 @@ export const login = (state= initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 token: null,
-                userId: null
             }
             break;
         default:

@@ -1,27 +1,20 @@
+import axios from "axios";
+
 const useHttp = () => {
 
     const sendRequest = async requestConfig => {
         try {
-            const res = await fetch(
-                requestConfig.url, {
-                    method: requestConfig.method,
-                    headers: requestConfig.headers,
-                    body: requestConfig.body
-                }
-            );
-            const data = await res.json();
-            let errorMessage;
-            // if (data.error.errors){
-            //     errorMessage = data.error.errors[0].message
-            // }else{
-            //     errorMessage = data.error
-            // }
-            // if (errorMessage) throw new Error(errorMessage);
+            const res = await axios({
+                method: requestConfig.method ? requestConfig.method : "GET",
+                url: requestConfig.url,
+                headers: requestConfig.headers,
+                data: requestConfig.body
+            });
             
-            return data;
+            return res;
             
         } catch (error) {
-            return {error: error.message};
+            return { error: error.response.data.error};
         }
     }
 

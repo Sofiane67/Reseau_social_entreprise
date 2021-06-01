@@ -8,13 +8,18 @@ export const login = userDataConnect => {
         const response = httpRequest("http://localhost:3000/api/auth/login", userDataConnect);
         
         response().then(data =>{
-            if(data.error) throw new Error(data.error)
-            
+           
+            if(data.error) {
+                console.log(data.error)
+                throw new Error(data.error)
+            }
+
+            const {userId, token} = data.data 
             dispatch({
                 type: LOGIN, value: {
-                    isLoggedIn: !!data.token,
-                    token: data.token,
-                    userId: data.userId
+                    isLoggedIn: !!token,
+                    token,
+                    userId
                 }
             });
         }).catch(error => {
