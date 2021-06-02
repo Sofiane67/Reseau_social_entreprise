@@ -47,7 +47,7 @@ export const formFieldPost = {
     },
     imageFile: {
         name: "imageUrl",
-        id: "imageUrl",
+        id: "imageFile",
         accept: "image/jpg, image/jpeg, image/png, image/gif"
     }
 };

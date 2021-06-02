@@ -3,10 +3,11 @@ const Post = require("../models/post");
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
     req.body.imageUrl = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`: null;
+    req.body.text = req.body.text === "" ? null : req.body.text;
     req.user.createPost({ ...req.body })
         .then(post =>{ 
             post.setForum(forumId);
-            res.status(201).json({ message: "Nouveau post créé" })
+            res.status(201).json({ message: "Nouveau post créé" });
         })
     .catch(error => res.status(500).json({ error }))
 };

@@ -16,13 +16,14 @@ const FormPost = () => {
     const postDataStored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const [isShow, setIsShow] = useState(false);
-
+    
     useEffect(() => {
         if(formIsSended){
             const formData = new FormData();
             formData.append("text", postDataStored.text);
             if (postDataStored.imageUrl) formData.append("imageUrl", postDataStored.imageUrl);
             dispatch(addPost(formData));
+            dispatch({ type: GET_POST_IMAGE, value: null})
             setIsShow(false);
         }
     } ,[formIsSended, dispatch, postDataStored]);
