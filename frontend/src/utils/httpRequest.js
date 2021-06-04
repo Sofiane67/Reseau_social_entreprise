@@ -12,11 +12,14 @@ export const httpRequest = (url, dataBody = null) => {
             settings = {
                 url,
                 method: "POST",
-                headers: headers,
+                headers,
                 body: dataBody
             }
         }else{
-            settings = {url};
+            settings = {
+                url,
+                headers
+            };
         }
         return sendRequest(settings);
     }

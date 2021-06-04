@@ -2,7 +2,7 @@ const express = require("express");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
-
+const path = require("path");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
     }).catch(err => console.log(err));
 })
 
-
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
 

@@ -15,3 +15,14 @@ export const loginNav = [
         path: "/logout"
     }
 ];
+
+export const asideForumNav = [
+    {
+        name: "Multimedia",
+        path: "/multimedia"
+    },
+    {
+        name: "Texte",
+        path: "/texte"
+    },
+]

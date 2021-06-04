@@ -4,9 +4,10 @@ import {requireLogin} from "./guards/required-login";
 import Wrapper from "./components/layout/Wrapper/Wrapper";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Header from "./components/layout/Header/Header";
 import Navigation from "./components/layout/Navigation/Navigation";
+import MainNavigationLink from "./components/MainMenuLink/MainMenuLink";
 
 
 const App = () => {
@@ -14,7 +15,9 @@ const App = () => {
     return (
         <Wrapper>
             <Header>
-                <Navigation/>
+                <Navigation>
+                    <MainNavigationLink/>
+                </Navigation>
             </Header>
             <GuardProvider>
                 <Switch>
@@ -27,11 +30,12 @@ const App = () => {
                     <Route path="/home">
                         <Home />
                     </Route>
-                    <GuardedRoute path="/" exact component={Home} guards={[requireLogin]} meta={{auth:true}}/>
-                    <GuardedRoute path="/login" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
                     <Route path="/logout">
-                        <Redirect to="/"/>
+                        <Redirect to="/" />
                     </Route>
+                    <GuardedRoute path="/" component={Home} guards={[requireLogin]} meta={{auth:true}}/>
+                    <GuardedRoute path="/login" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
+                    
                 </Switch>
             </GuardProvider>
         </Wrapper>

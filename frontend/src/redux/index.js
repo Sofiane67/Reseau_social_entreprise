@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools} from "redux-devtools-extension";
 import {formInputValue} from "./reducers/form/reducers";
 import {login} from "./reducers/login/reducers";
+import {posts} from "./reducers/posts/reducers";
 
 const migrations = {
     1: state => ({
@@ -14,7 +15,7 @@ const migrations = {
 
 const persistConfig = {
     key: 'root',
-    blacklist: ['formInputValue'],
+    blacklist: ['formInputValue', "posts"],
     storage,
     version: 1,
     migrate: createMigrate(migrations, {debug: true})
@@ -22,7 +23,8 @@ const persistConfig = {
 
 const reducers = () => combineReducers({
     formInputValue: formInputValue,
-    login: login
+    login: login,
+    posts: posts
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers());

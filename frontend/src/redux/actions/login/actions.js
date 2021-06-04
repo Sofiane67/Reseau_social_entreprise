@@ -14,7 +14,7 @@ export const login = userDataConnect => {
                 throw new Error(data.error)
             }
 
-            const {userId, token} = data.data 
+            const {userId, token} = data.data;
             dispatch({
                 type: LOGIN, value: {
                     isLoggedIn: !!token,
