@@ -1,8 +1,17 @@
+@import "../../../sass/utils.scss";
 .nav{
     align-self: center;
     justify-self: end;
 
+    @include media-queries(map-get($breakpoints, bp-600)){
+        justify-self: center;
+    }
+
     &__list{
         display: flex;
-    } 
+
+        &--column{
+            flex-direction: column;
+        }
+    }
 }

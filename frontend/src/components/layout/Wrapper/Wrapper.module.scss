@@ -7,4 +7,11 @@
         width: 100%;
         padding: 0 3rem;
     }
+
+    &__header{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(25rem, 1fr));
+        justify-content: center;
+    }
 }
+

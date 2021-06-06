@@ -1,6 +1,37 @@
+@import "../../../sass/utils.scss";
+
 .card{
     background-color: #fff;
     border-radius: 1rem;
+    @include media-queries(map-get($breakpoints, bp-600)){
+        margin: 0 3rem;
+    }
+
+    &__home{
+        &--form{
+            grid-column: col-start 2/col-end 5;
+
+            @include media-queries(map-get($breakpoints, bp-600)){
+                grid-column: center-start/center-end;
+                grid-row: 2/3;
+            }
+        }
+
+        &--aside-menu{
+            grid-column: col-start 1 / col-end 1;
+            grid-row: 2/4;
+            align-self: start;
+            
+            @include media-queries(map-get($breakpoints, bp-600)){
+                grid-column: center-start/center-end;
+                grid-row: 3/4;
+            }
+        }
+    }
+
+    &__post{
+        padding: 3rem;
+    }
 
     & form{
         width: 100%;

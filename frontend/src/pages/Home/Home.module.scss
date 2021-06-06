@@ -1,4 +1,20 @@
+@import "../../sass/utils.scss";
+
 .home{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
+    &__post-list{
+        grid-column: col-start 2/col-end 5;
+        display: grid;
+        grid-gap: 3rem;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            grid-column: center-start/center-end;
+            grid-row: 4/5;
+        }
+    }
+    
+    // @include media-queries(map-get($breakpoints, bp-1340)){
+    //     width: 100%;
+    //     padding: 0 3rem;
+    // }
 }

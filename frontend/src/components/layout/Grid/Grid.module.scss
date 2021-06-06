@@ -1,0 +1,11 @@
+@import "../../../sass/utils.scss";
+.grid{
+    display: grid;
+    grid-template-columns: [full-start] minmax(min-content, 1fr) [center-start] repeat(6,[col-start] minmax(min-content,16rem)[col-end])  [center-end] minmax(min-content, 1fr)[full-end];
+    grid-gap: 3rem;
+
+    @include media-queries(map-get($breakpoints, bp-600)){
+        grid-template-columns: [full-start] 0rem [center-start] 1fr [center-end] 0rem [full-end];
+        grid-column-gap: 0;
+    }
+}

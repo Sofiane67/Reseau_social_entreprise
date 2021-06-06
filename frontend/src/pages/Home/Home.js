@@ -19,20 +19,19 @@ const Home = () => {
         }   
     },[dispatch, isSended]);
 
+    console.log(posts);
+
     return (
         <Fragment>
-            <Card>
+            <Card className="card__home--form">
                 <FormPost />
             </Card>
-            <section className={classes.home}>
-                <AsideMenu className={classes["home__aside--left"]}/>
-                <div className={classes["home__post-list"]}>
-                    {
-                        posts.map((post, index) => <Post key={index} text={post.text} imageUrl={post.imageUrl}/>)
-                    }
-                </div>
-                <div>ASIDE RIGTH</div>
-            </section>
+            <AsideMenu className="card__home--aside-menu"/>
+            <div className={classes["home__post-list"]}>
+                {
+                    posts.map((post, index) => <Post key={index} text={post.text} imageUrl={post.imageUrl}/>)
+                }
+            </div>
         </Fragment>
     )
 };

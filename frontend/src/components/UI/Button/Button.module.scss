@@ -11,4 +11,14 @@
     &:hover{
         background-color: lighten(#FD2D01, 5%);
     }
+
+    &__post{
+        color: #4f4f4f;
+        background-color: #fff;
+        flex:1;
+
+        &:hover{
+            background-color: #f2f2f2;
+        }
+    }
 }

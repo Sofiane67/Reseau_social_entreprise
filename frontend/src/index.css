@@ -27,9 +27,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
   font-weight: 400;
-  display: grid;
-  justify-items: center;
-  height: 100vh;
+  color: #4f4f4f;
+  /* display: grid;
+  justify-items: center; */
+  /* height: 100vh; */
 }
 
 code {
@@ -38,9 +39,9 @@ code {
 }
 
 #root{
-  width: 100vw;
-  display: grid;
-  justify-items: center;
+  /* width: 100vw; */
+  /* display: grid; */
+  /* justify-items: center; */
 }
 
 

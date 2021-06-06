@@ -1,5 +1,6 @@
 $breakpoints : (
-    bp-1340: 83.75em
+    bp-1340: 83.75em,
+    bp-600: 37.5em
 );
 
 @mixin media-queries($breakpoint){

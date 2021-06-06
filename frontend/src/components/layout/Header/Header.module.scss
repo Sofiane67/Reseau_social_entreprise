@@ -1,14 +1,21 @@
 .header{
+    grid-column: full-start/full-end;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+ 
+
+    &--bg-white{
+        background-color: #fff;
+    }
 
     &__logo-box{
-        width: 30rem;
+        // width: 30rem;
         padding: 2rem 0;
     }
 
     &__logo{
-        width: 100%;
+        width: 25rem;
     }
 }

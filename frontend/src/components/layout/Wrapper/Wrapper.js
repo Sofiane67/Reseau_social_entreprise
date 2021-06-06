@@ -1,5 +1,9 @@
 import classes from "./Wrapper.module.scss";
 
-const Wrapper = props => <div className={classes.wrapper}>{props.children}</div>
+const Wrapper = props => {
+    const className = props.className;
+    console.log(className);
+    return <div className={`${classes.wrapper} ${classes[className]}`}>{props.children}</div>
+}
 
 export default Wrapper;

@@ -1,19 +1,20 @@
 import {Switch, Route, Redirect} from "react-router-dom";
 import {GuardedRoute, GuardProvider} from "react-router-guards"
 import {requireLogin} from "./guards/required-login";
-import Wrapper from "./components/layout/Wrapper/Wrapper";
+import Grid from "./components/layout/Grid/Grid";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home/Home";
 import Header from "./components/layout/Header/Header";
 import Navigation from "./components/layout/Navigation/Navigation";
 import MainNavigationLink from "./components/MainMenuLink/MainMenuLink";
+import { Fragment } from "react";
 
 
 const App = () => {
 
     return (
-        <Wrapper>
+        <Grid>
             <Header>
                 <Navigation>
                     <MainNavigationLink/>
@@ -38,7 +39,7 @@ const App = () => {
                     
                 </Switch>
             </GuardProvider>
-        </Wrapper>
+        </Grid>
     )
 }
 
