@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const User = require("../models/user");
 
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
@@ -36,8 +37,10 @@ exports.deletePost = (req,res,next) => {
 }
 
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll()
-    .then(posts => res.status(200).json(posts))
+    Post.findAll({include: User})
+    .then(posts => {
+        console.log(posts);
+        return res.status(200).json(posts)})
     .catch(error => res.status(400).json({error}))
 };
 

@@ -85,6 +85,7 @@ app.use("/api/posts", postRoutes);
 User.belongsTo(Role);
 //un User peut publier plusieurs Posts
 User.hasMany(Post);
+Post.belongsTo(User);
 //un User peut partager plusieurs Post et un Post peut être partagé plusieurs fois
 User.belongsToMany(Post, {through: Sharing});
 //un User peut commenter plusieurs Post et un Post peut être commenté plusieurs fois

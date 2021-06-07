@@ -2,7 +2,8 @@
 
 .card{
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 1px 1px 1rem rgba(0,0,0,0.2);
     @include media-queries(map-get($breakpoints, bp-600)){
         margin: 0 3rem;
     }

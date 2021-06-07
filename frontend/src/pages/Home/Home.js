@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useCallback} from "react";
+import { Fragment, useEffect, memo} from "react";
 import {useDispatch, useSelector} from  "react-redux";
 import Card from "../../components/UI/Card/Card";
 import FormPost from "../../components/FormPost/FormPost";
@@ -17,9 +17,9 @@ const Home = () => {
         if(!isSended){
             dispatch(getAllPosts());
         }   
-    },[dispatch, isSended]);
+    },[]);
 
-    console.log(posts);
+    console.log(posts)
 
     return (
         <Fragment>
@@ -29,11 +29,11 @@ const Home = () => {
             <AsideMenu className="card__home--aside-menu"/>
             <div className={classes["home__post-list"]}>
                 {
-                    posts.map((post, index) => <Post key={index} text={post.text} imageUrl={post.imageUrl}/>)
+                    posts.map((post, index) => <Post key={index} text={post.text} imageUrl={post.imageUrl} author={post.user}/>)
                 }
             </div>
         </Fragment>
     )
 };
 
-export default Home;
+export default memo(Home);
