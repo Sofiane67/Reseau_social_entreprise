@@ -5,7 +5,7 @@ import {getAllPosts} from "../posts/actions";
 
 export const signup = user => {
     return dispatch =>{
-        const response = httpRequest("http://localhost:3000/api/auth/signup", user);
+        const response = httpRequest("http://localhost:3000/api/auth/signup", "POST", user);
         response().then(data => {
             if(data.error){
                 dispatch({ type: ERROR, message: data.error.errors[0].message })
@@ -17,7 +17,7 @@ export const signup = user => {
 export const addPost = post => {
 
     return dispatch => {
-        const response = httpRequest("http://localhost:3000/api/posts/1", post);
+        const response = httpRequest("http://localhost:3000/api/posts/1", "POST", post);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {

@@ -5,7 +5,7 @@ import {GET_ALL_POST} from "./types";
 
 export const getAllPosts = () => {
     return dispatch => {
-        const res = httpRequest("http://localhost:3000/api/posts");
+        const res = httpRequest("http://localhost:3000/api/posts", "GET");
         res().then(res => {
             const {data} = res;
             dispatch({
@@ -14,5 +14,15 @@ export const getAllPosts = () => {
             });
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
+    }
+}
+
+export const deletePost = (forumId, postId) => {
+    console.log("DELETE POST")
+    return dispatch => {
+        const res = httpRequest(`http://localhost:3000/api/posts/${forumId}/${postId}`, "DELETE");
+        res().then(res => {
+            dispatch(getAllPosts());
+        })
     }
 }

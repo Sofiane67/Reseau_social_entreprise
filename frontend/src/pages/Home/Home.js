@@ -19,8 +19,6 @@ const Home = () => {
         }   
     },[]);
 
-    console.log(posts)
-
     return (
         <Fragment>
             <Card className="card__home--form">
@@ -29,7 +27,7 @@ const Home = () => {
             <AsideMenu className="card__home--aside-menu"/>
             <div className={classes["home__post-list"]}>
                 {
-                    posts.map((post, index) => <Post key={index} text={post.text} imageUrl={post.imageUrl} author={post.user}/>)
+                    posts.map(post => <Post key={post.id} text={post.text} imageUrl={post.imageUrl} author={post.user} forum={post.forumId} id={post.id}/>)
                 }
             </div>
         </Fragment>

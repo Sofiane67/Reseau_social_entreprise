@@ -13,6 +13,7 @@ export const login = (state= initialState, action) => {
                 ...state,
                 isLoggedIn: action.value.isLoggedIn,
                 token: action.value.token, 
+                userId: action.value.userId
             }
             break;
         case LOGOUT:

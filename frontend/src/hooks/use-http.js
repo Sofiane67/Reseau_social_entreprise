@@ -5,7 +5,7 @@ const useHttp = () => {
     const sendRequest = async requestConfig => {
         try {
             const res = await axios({
-                method: requestConfig.method ? requestConfig.method : "GET",
+                method: requestConfig.method,
                 url: requestConfig.url,
                 headers: requestConfig.headers,
                 data: requestConfig.body

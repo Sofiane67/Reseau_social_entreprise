@@ -1,14 +1,31 @@
+import {useDispatch, useSelector} from "react-redux";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 import classes from "./Post.module.scss";
 import {dateFormat} from "../../utils/funcsHelper";
+import { deletePost} from "../../redux/actions/posts/actions";
 const Post = props => {
+    const userId = useSelector(store => store.login.userId);
+    const dispatch = useDispatch();
     const {
         name,
         firstName,
         createdAt,
-        updatedAt
+        updatedAt,
+        id: authorId
     } = props.author;
+
+    const{
+        forum: forumId,
+        id: postId
+    } = props;
+
+    const isAuthor = authorId === userId;
+
+    const deletePostHandler = (e) => {
+        console.log("POST SUPPRIMEE");
+        dispatch(deletePost(forumId, postId));
+    }
 
     return (
         <Card className="card__post">
@@ -36,6 +53,8 @@ const Post = props => {
             <div className={classes["post__action"]}>
                 <Button className="button__post">Commenter</Button>
                 <Button className="button__post">Partager</Button>
+                {isAuthor && <Button className="button__post">Modifier</Button>}
+                {isAuthor && <Button className="button__post" onClick={deletePostHandler} >Supprimer</Button>}
             </div>
         </Card>
     )
