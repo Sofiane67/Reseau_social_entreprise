@@ -1,5 +1,6 @@
 import {httpRequest} from "../../../utils/httpRequest";
-import { FORM_IS_SENDED, ERROR } from "../form/type";
+import { FORM_IS_SENDED } from "../form/type";
+import { SHOW_MODAL } from "../modal/types";
 import {GET_ALL_POST} from "./types";
 
 
@@ -18,11 +19,11 @@ export const getAllPosts = () => {
 }
 
 export const deletePost = (forumId, postId) => {
-    console.log("DELETE POST")
     return dispatch => {
         const res = httpRequest(`http://localhost:3000/api/posts/${forumId}/${postId}`, "DELETE");
         res().then(res => {
             dispatch(getAllPosts());
+            dispatch({type: SHOW_MODAL, value: {isShow: false}})
         })
     }
 }

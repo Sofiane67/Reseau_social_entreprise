@@ -11,7 +11,6 @@ export const posts = (state = initialState, action) => {
                 ...action.value,
             ]
             break;
-    
         default:
             return state;
     }

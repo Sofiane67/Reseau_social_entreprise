@@ -8,13 +8,16 @@ import Home from "./pages/Home/Home";
 import Header from "./components/layout/Header/Header";
 import Navigation from "./components/layout/Navigation/Navigation";
 import MainNavigationLink from "./components/MainMenuLink/MainMenuLink";
-import { Fragment } from "react";
+import Modal from "./components/Modal/Modal";
+import {useSelector} from "react-redux";
 
 
 const App = () => {
+    const modalIsShow = useSelector(store => store.modal.isShow);
 
     return (
         <Grid>
+            {modalIsShow && <Modal/>}
             <Header>
                 <Navigation>
                     <MainNavigationLink/>

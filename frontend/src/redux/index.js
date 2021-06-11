@@ -6,6 +6,7 @@ import { composeWithDevTools} from "redux-devtools-extension";
 import {formInputValue} from "./reducers/form/reducers";
 import {login} from "./reducers/login/reducers";
 import {posts} from "./reducers/posts/reducers";
+import {modal} from "./reducers/modal/reducers";
 
 const migrations = {
     1: state => ({
@@ -15,7 +16,7 @@ const migrations = {
 
 const persistConfig = {
     key: 'root',
-    blacklist: ['formInputValue', "posts"],
+    blacklist: ['formInputValue', "posts", "modal"],
     storage,
     version: 1,
     migrate: createMigrate(migrations, {debug: true})
@@ -24,7 +25,8 @@ const persistConfig = {
 const reducers = () => combineReducers({
     formInputValue: formInputValue,
     login: login,
-    posts: posts
+    posts: posts,
+    modal: modal
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers());

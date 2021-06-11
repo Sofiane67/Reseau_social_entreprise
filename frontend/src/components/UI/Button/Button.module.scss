@@ -22,4 +22,13 @@
             border-radius: 0;
         }
     }
+
+    &__modal{
+        &--action{
+            background-color: red;
+        }
+        &--cancel{
+            background-color: rgb(172, 167, 167);
+        }
+    }
 }
