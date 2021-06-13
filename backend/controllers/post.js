@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const User = require("../models/user");
+const fs = require("fs");
 
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
@@ -31,8 +32,14 @@ exports.deletePost = (req,res,next) => {
     const postId = req.params.postId;
 
     Post.findByPk(postId)
-    .then(post => post.destroy())
-    .then(() => res.status(200).json({message: "Post suppimé"}))
+    .then(post => {
+        console.log(post.imageUrl);
+        const filename = post.imageUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+            post.destroy();
+        })
+    })
+    .then(() => res.status(200).json({message: "Post supprimé"}))
     .catch(error => res.status(400).json({error}));
 }
 

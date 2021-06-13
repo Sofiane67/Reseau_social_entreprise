@@ -46,7 +46,7 @@ const Modal = props => {
     return (
         <Fragment>
             {ReactDOM.createPortal(<BackDrop />, document.querySelector('#backdrop'))}
-            {ReactDOM.createPortal(<ModalOverlay nameButton={props.nameButton} postId={props.postId} forumId={props.forumId} onShowModal={props.onShowModal}/>, document.querySelector('#overlay'))}
+            {ReactDOM.createPortal(<ModalOverlay />, document.querySelector('#overlay'))}
         </Fragment>
     )
 }
