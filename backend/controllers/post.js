@@ -33,10 +33,18 @@ exports.deletePost = (req,res,next) => {
 
     Post.findByPk(postId)
     .then(post => {
-        const filename = post.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
-            post.destroy();
-        })
+        post.destroy();
+        return post;
+    })
+    .then(post => {
+
+        if(post.imageUrl){
+            const filename = post.imageUrl.split("/images/")[1];
+            console.log(filename)
+            fs.unlink(`images/${filename}`, () => {
+                return;
+            })
+        }
     })
     .then(() => res.status(200).json({message: "Post supprimé"}))
     .catch(error => res.status(400).json({error}));
