@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.addPost = (req, res, next) => {
     const forumId = req.params.forumId;
-    req.body.imageUrl = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`: null;
+    req.body.imageUrl = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}` : req.body.imageUrl;
     req.body.text = req.body.text === "" ? null : req.body.text;
     req.user.createPost({ ...req.body })
         .then(post =>{ 

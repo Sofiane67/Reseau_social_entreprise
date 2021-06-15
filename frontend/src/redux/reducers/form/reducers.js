@@ -37,7 +37,9 @@ export const formInputValue = (state = initialState, action) => {
             }
             break;
         case GET_POST_IMAGE:
-            const imageUrl =action.value === null ? null : action.value[0]
+
+            const imageUrl = action.value instanceof FileList ? action.value[0] : action.value;
+            
             newState = {
                 ...state,
                 imageUrl: imageUrl,
