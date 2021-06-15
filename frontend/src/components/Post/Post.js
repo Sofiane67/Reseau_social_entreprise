@@ -33,6 +33,7 @@ const Post = props => {
             type: "post",
             forumId,
             postId,
+            sql: "delete",
             message: "Confirmez vous la suppression du post ?"
         }))
     }

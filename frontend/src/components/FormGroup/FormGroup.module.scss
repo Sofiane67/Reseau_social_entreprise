@@ -2,11 +2,16 @@
     &__group{
         display: flex;
         flex-direction: column;
-        padding: 1rem 0;
+        align-items: flex-start;
+        margin: 1rem 0;
     }
 
     &__lable{
         margin-bottom: 1rem;
         font-weight: 600;
+    }
+
+    & textarea{
+        width: 100%;
     }
 }

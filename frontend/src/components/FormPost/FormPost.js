@@ -5,12 +5,13 @@ import Input from "../UI/Input/Input";
 import InputFile from "../UI/Input/inputFile/inputFile";
 import Textarea from "../UI/Textarea/Textarea";
 import {useEffect} from "react";
-import Button from "../UI/Button/Button";
+import classes from "./FormPost.module.scss";
 import {formFieldPost} from "../../utils/formFields";
 import {GET_POST_TEXT, GET_POST_IMAGE} from "../../redux/actions/form/type";
 import {useSelector, useDispatch} from "react-redux";
 import {addPost} from "../../redux/actions/form/actions";
-const FormPost = () => {
+
+const FormPost = props => {
 
     const dispatch = useDispatch();
     const postDataStored = useSelector(state => state.formInputValue);
@@ -28,20 +29,21 @@ const FormPost = () => {
         }
     } ,[formIsSended, dispatch, postDataStored]);
 
-    const showHandler = () => {
+    const showImageField = e => {
+        e.preventDefault();
         setIsShow(state => !state);
     };
 
     return (
-            <Form>
+            <Form className="form__post">
                 <FormGroup>
-                    <Textarea field={formFieldPost.text} action={GET_POST_TEXT}/>
+                    <Textarea field={formFieldPost.text} rows="12" cols="60" action={GET_POST_TEXT}/>
                 </FormGroup>
-                <span onClick={showHandler}>Ajouter image</span>
+                {!isShow && <span className={classes["formPost__add-image-btn"]} onClick={showImageField}>Ajouter image</span>}
                 {
                     isShow &&(
                     <Fragment>
-                        <FormGroup>
+                        <FormGroup field={formFieldPost.imageUrl}>
                             <Input field={formFieldPost.imageUrl} action={GET_POST_IMAGE} />
                         </FormGroup>
                         <FormGroup>
@@ -50,7 +52,7 @@ const FormPost = () => {
                     </Fragment>
                     )
                 }
-                <Button>Publier</Button>
+                {props.children}
             </Form>
     )
 }

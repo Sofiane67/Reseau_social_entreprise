@@ -41,6 +41,8 @@ export const formFieldPost = {
         placeholder: "Quoi de neuf ?"
     },
     imageUrl: {
+        htmlFor: "imageUrl",
+        label: "Url: ",
         name: "imageUrl",
         id: "imageUrl",
         type: "url"

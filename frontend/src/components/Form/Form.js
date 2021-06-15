@@ -12,8 +12,10 @@ const Form = props => {
         dispatch({ type: FORM_IS_SENDED, isSend: true});
     }
 
+    const propClass = props.className;
+
     return (
-        <form onSubmit={submitFormHandler} className={classes.form}>
+        <form onSubmit={submitFormHandler} className={`${classes.form} ${classes[propClass]}`}>
             {props.children}
         </form>
     );
