@@ -9,8 +9,6 @@ const FormGroup = props => {
         htmlFor = props.field.htmlFor;
         label = props.field.label;
     }
-
-    console.log(props.field);
  
     return (
         <div className={classes["form__group"]}>

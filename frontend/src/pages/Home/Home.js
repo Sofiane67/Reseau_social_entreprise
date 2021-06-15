@@ -23,12 +23,11 @@ const Home = () => {
     },[]);
 
     const showModaHandler = e => {
-        console.log(e.target.name)
         dispatch(showModal({
             isShow: true,
             type: "post",
             sql: "insert",
-            message: <FormPost><ButtonsModal nameButton="Publier" /> </FormPost>
+            content: <FormPost><ButtonsModal nameButton="Publier" /> </FormPost>
         }))
     };
 

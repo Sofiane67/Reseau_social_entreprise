@@ -2,6 +2,8 @@ import {Fragment} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
+import FormPost from "../FormPost/FormPost";
+import ButtonsModal from "../ButtonModal/ButtonsModal";
 import classes from "./Post.module.scss";
 import {dateFormat} from "../../utils/funcsHelper";
 import {showModal} from "../../redux/actions/modal/actions";
@@ -25,22 +27,35 @@ const Post = props => {
 
     const isAuthor = authorId === userId;
 
+    const modalContent = {
+        isShow: true,
+        nameButton: "",
+        type: "post",
+        forumId,
+        postId,
+        content: ""
+    }
 
-    const showModalHandler = (e) => {
+    const showDeleteModalHandler = e => {
         dispatch(showModal({
-            isShow: true,
+            ...modalContent,
             nameButton: e.target.innerText,
             type: "post",
             forumId,
             postId,
             sql: "delete",
-            message: "Confirmez vous la suppression du post ?"
+            content: "Confirmez vous la suppression du post ?"
         }))
     }
 
-
-
-
+    const showUpdateModalHander = e => {
+        dispatch(showModal({
+            ...modalContent,
+            sql: "update",
+            content: <FormPost><ButtonsModal nameButton="Modifier" /> </FormPost>
+        }))
+    }
+ 
     return (
         <Fragment>
             <Card className="card__post">
@@ -68,8 +83,8 @@ const Post = props => {
                 <div className={classes["post__action"]}>
                     <Button className="button__post">Commenter</Button>
                     <Button className="button__post">Partager</Button>
-                    {isAuthor && <Button className="button__post">Modifier</Button>}
-                    {isAuthor && <Button className="button__post" onClick={showModalHandler}>Supprimer</Button>}
+                    {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
+                    {isAuthor && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
                 </div>
             </Card>
         </Fragment>

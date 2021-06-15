@@ -33,7 +33,6 @@ exports.deletePost = (req,res,next) => {
 
     Post.findByPk(postId)
     .then(post => {
-        console.log(post.imageUrl);
         const filename = post.imageUrl.split("/images/")[1];
         fs.unlink(`images/${filename}`, () => {
             post.destroy();
