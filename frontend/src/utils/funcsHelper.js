@@ -8,4 +8,11 @@ export const dateFormat = (date) => {
     const year = dt.getFullYear(date);
 
     return `${day} ${dayNum} ${month} ${year}`;
+};
+
+export const formData = dataStored => {
+    const formData = new FormData();
+    formData.append("text", dataStored.text);
+    if (dataStored.imageUrl) formData.append("imageUrl", dataStored.imageUrl);
+    return formData;
 }

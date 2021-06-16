@@ -12,7 +12,7 @@ const ButtonsModal = props => {
     return (
         <div className={classes.buttonModal}>
             <Button onClick={props.onClick} className="button__modal--action">{props.nameButton}</Button>
-            <Button onClick={cancelDeleteHandler} className="button__modal--cancel">Annuler</Button>
+            <Button onClick={cancelDeleteHandler} type="button" className="button__modal--cancel">Annuler</Button>
         </div>
     );
 };

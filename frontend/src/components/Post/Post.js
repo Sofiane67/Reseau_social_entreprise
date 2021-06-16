@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
@@ -7,9 +7,11 @@ import ButtonsModal from "../ButtonModal/ButtonsModal";
 import classes from "./Post.module.scss";
 import {dateFormat} from "../../utils/funcsHelper";
 import {showModal} from "../../redux/actions/modal/actions";
+import { formData } from "../../utils/funcsHelper";
 
 const Post = props => {
     const dispatch = useDispatch();
+    const postDataStored = useSelector(state => state.formInputValue);
     const userId = useSelector(store => store.login.userId);
 
     const {
@@ -20,7 +22,7 @@ const Post = props => {
         id: authorId
     } = props.author;
 
-    const{
+    const {
         forum: forumId,
         id: postId
     } = props;
@@ -46,13 +48,13 @@ const Post = props => {
             sql: "delete",
             content: "Confirmez vous la suppression du post ?"
         }))
-    }
+    };
 
     const showUpdateModalHander = e => {
         dispatch(showModal({
             ...modalContent,
             sql: "update",
-            content: <FormPost><ButtonsModal nameButton="Modifier" /> </FormPost>
+            content: <FormPost edit={{forumId, postId}} ><ButtonsModal nameButton="Modifier" /> </FormPost>
         }))
     }
  

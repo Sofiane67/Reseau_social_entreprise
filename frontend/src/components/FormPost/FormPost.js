@@ -7,9 +7,11 @@ import Textarea from "../UI/Textarea/Textarea";
 import {useEffect} from "react";
 import classes from "./FormPost.module.scss";
 import {formFieldPost} from "../../utils/formFields";
+import {formData} from "../../utils/funcsHelper";
 import {GET_POST_TEXT, GET_POST_IMAGE} from "../../redux/actions/form/type";
 import {useSelector, useDispatch} from "react-redux";
-import {addPost} from "../../redux/actions/form/actions";
+import { addPost } from "../../redux/actions/posts/actions";
+import { editPost } from "../../redux/actions/posts/actions";
 
 const FormPost = props => {
 
@@ -17,15 +19,17 @@ const FormPost = props => {
     const postDataStored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const [isShow, setIsShow] = useState(false);
-    
+
     useEffect(() => {
         if(formIsSended){
-            const formData = new FormData();
-            formData.append("text", postDataStored.text);
-            if (postDataStored.imageUrl) formData.append("imageUrl", postDataStored.imageUrl);
-            dispatch(addPost(formData));
-            dispatch({ type: GET_POST_IMAGE, value: null})
-            setIsShow(false);
+            const data = formData(postDataStored);
+            if(props.edit){
+                const {forumId, postId} = props.edit;
+                dispatch(editPost(data, forumId, postId));
+            }else{
+                dispatch(addPost(data));
+            }
+            dispatch({ type: GET_POST_IMAGE, value: null })
         }
     } ,[formIsSended, dispatch, postDataStored]);
 

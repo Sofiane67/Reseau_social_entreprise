@@ -16,12 +16,22 @@ exports.addPost = (req, res, next) => {
 
 exports.editPost = (req, res, next) => {
     const postId = req.params.postId;
-    console.log(postId)
+    req.body.imageUrl = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}` : req.body.imageUrl;
+
     Post.findByPk(postId)
     .then(post => {
-        post.text = req.body.text;
+        if (!req.body.imageUrl) return post;
+        if (post.imageUrl) {
+            const filename = post.imageUrl.split("/images/")[1];
+            fs.unlink(`images/${filename}`, () => {
+                return;
+            })
+            return post;
+        }
+    })
+    .then(post => {
+        if (req.body.text) post.text = req.body.text;
         post.imageUrl = req.body.imageUrl;
-
         return post.save();
     })
     .then(() => res.status(200).json({message: "Post modifié"}))
@@ -40,7 +50,6 @@ exports.deletePost = (req,res,next) => {
 
         if(post.imageUrl){
             const filename = post.imageUrl.split("/images/")[1];
-            console.log(filename)
             fs.unlink(`images/${filename}`, () => {
                 return;
             })
