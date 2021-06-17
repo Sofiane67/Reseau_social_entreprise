@@ -4,10 +4,6 @@ import { SHOW_MODAL } from "../modal/types";
 import { ERROR } from "../form/type";
 import {GET_ALL_POST} from "./types";
 
-
-
-
-
 export const getAllPosts = () => {
     return dispatch => {
         const res = httpRequest("http://localhost:3000/api/posts", "GET");

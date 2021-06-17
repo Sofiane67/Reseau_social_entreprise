@@ -54,7 +54,15 @@ const Post = props => {
         dispatch(showModal({
             ...modalContent,
             sql: "update",
-            content: <FormPost edit={{forumId, postId}} ><ButtonsModal nameButton="Modifier" /> </FormPost>
+            content: <FormPost action="edit" ><ButtonsModal nameButton="Modifier" /> </FormPost>
+        }))
+    }
+
+    const showCommentModalHandler = e => {
+        dispatch(showModal({
+            ...modalContent,
+            type: "comment",
+            content: <FormPost action="add_comment"><ButtonsModal nameButton="Commenter"/> </FormPost>
         }))
     }
  
@@ -83,7 +91,7 @@ const Post = props => {
                     <p>0 partage</p>
                 </div>
                 <div className={classes["post__action"]}>
-                    <Button className="button__post">Commenter</Button>
+                    <Button className="button__post" onClick={showCommentModalHandler}>Commenter</Button>
                     <Button className="button__post">Partager</Button>
                     {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
                     {isAuthor && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}

@@ -11,7 +11,6 @@ const BackDrop = props => <div className={classes.backdrop} onClick={props.onBac
 const ModalOverlay = props => {
     const dispatch = useDispatch();
     const modal = useSelector(store => store.modal);
-    
     const confirmHandler = () => {
         switch (modal.type) {
             case "post":
@@ -26,7 +25,7 @@ const ModalOverlay = props => {
         <Fragment>
             <Card className="card__modal">
                 <div className={classes["modal__message"]}>{modal.content}</div>
-                {modal.sql == "delete" && <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>}
+                {(modal.sql == "delete" && modal.type !== "comment") && <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>}
             </Card>
         </Fragment>   
     )

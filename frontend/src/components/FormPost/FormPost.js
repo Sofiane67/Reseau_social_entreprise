@@ -19,15 +19,25 @@ const FormPost = props => {
     const postDataStored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const [isShow, setIsShow] = useState(false);
+    const modal = useSelector(store => store.modal);
+    const { forumId, postId } = modal;
+    const action = props.action ? props.action : "add";
+    const data = formData(postDataStored);
 
     useEffect(() => {
         if(formIsSended){
-            const data = formData(postDataStored);
-            if(props.edit){
-                const {forumId, postId} = props.edit;
-                dispatch(editPost(data, forumId, postId));
-            }else{
-                dispatch(addPost(data));
+            switch (action) {
+                case "add":
+                    dispatch(addPost(data));
+                    break;
+                case "edit": 
+                    dispatch(editPost(data, forumId, postId));
+                    break;
+                case "add_comment":
+                    console.log("COMMENTAIRE AJOUTE");
+                    break;
+                default:
+                    break;
             }
             dispatch({ type: GET_POST_IMAGE, value: null })
         }
@@ -43,7 +53,7 @@ const FormPost = props => {
                 <FormGroup>
                     <Textarea field={formFieldPost.text} rows="12" cols="60" action={GET_POST_TEXT}/>
                 </FormGroup>
-                {!isShow && <span className={classes["formPost__add-image-btn"]} onClick={showImageField}>Ajouter image</span>}
+                {(!isShow && modal.type !== "comment") && <span className={classes["formPost__add-image-btn"]} onClick={showImageField}>Ajouter image</span>}
                 {
                     isShow &&(
                     <Fragment>
