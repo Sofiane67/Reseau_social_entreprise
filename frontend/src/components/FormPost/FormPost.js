@@ -12,6 +12,7 @@ import {GET_POST_TEXT, GET_POST_IMAGE} from "../../redux/actions/form/type";
 import {useSelector, useDispatch} from "react-redux";
 import { addPost } from "../../redux/actions/posts/actions";
 import { editPost } from "../../redux/actions/posts/actions";
+import { addComment } from "../../redux/actions/comments/actions";
 
 const FormPost = props => {
 
@@ -22,7 +23,7 @@ const FormPost = props => {
     const modal = useSelector(store => store.modal);
     const { forumId, postId } = modal;
     const action = props.action ? props.action : "add";
-    const data = formData(postDataStored);
+    const data = postDataStored.imageUrl ? formData(postDataStored) : {text: postDataStored.text};
 
     useEffect(() => {
         if(formIsSended){
@@ -34,14 +35,14 @@ const FormPost = props => {
                     dispatch(editPost(data, forumId, postId));
                     break;
                 case "add_comment":
-                    console.log("COMMENTAIRE AJOUTE");
+                    dispatch(addComment(data, forumId, postId));
                     break;
                 default:
                     break;
             }
             dispatch({ type: GET_POST_IMAGE, value: null })
         }
-    } ,[formIsSended, dispatch, postDataStored]);
+    }, [formIsSended]);
 
     const showImageField = e => {
         e.preventDefault();

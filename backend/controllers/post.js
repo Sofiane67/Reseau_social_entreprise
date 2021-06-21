@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const User = require("../models/user");
+const Comment = require("../models/comment");
 const fs = require("fs");
 
 exports.addPost = (req, res, next) => {
@@ -25,9 +26,9 @@ exports.editPost = (req, res, next) => {
             const filename = post.imageUrl.split("/images/")[1];
             fs.unlink(`images/${filename}`, () => {
                 return;
-            })
-            return post;
+            });
         }
+        return post;
     })
     .then(post => {
         if (req.body.text) post.text = req.body.text;

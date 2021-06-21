@@ -15,6 +15,7 @@ const Sharing = require("./models/sharing");
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
+const commentRoutes = require("./routes/comment");
 const app = express();
 
 app.use((req, res, next) => {
@@ -47,10 +48,10 @@ app.use(xssClean());
 //****************************************************************************************************************************
         //A SUPPRIMER EN PROD
 //****************************************************************************************************************************
-// app.post("/api/forum", (req, res, next) => {
-//     const forumType = req.body.forumType;
-//     Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
-// });
+app.post("/api/forum", (req, res, next) => {
+    const forumType = req.body.forumType;
+    Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
+});
 
 // app.post("/api/role", (req, res, next) => {
 //     const roleName = req.body.roleName;
@@ -78,6 +79,7 @@ app.use((req, res, next) => {
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 //INITIALISATION DES ASSOCIATIONS ENTRE TABLES 
 
@@ -88,8 +90,13 @@ User.hasMany(Post);
 Post.belongsTo(User);
 //un User peut partager plusieurs Post et un Post peut être partagé plusieurs fois
 User.belongsToMany(Post, {through: Sharing});
-//un User peut commenter plusieurs Post et un Post peut être commenté plusieurs fois
-User.belongsToMany(Post, { through: Comment });
+
+
+User.hasMany(Comment, { onDelete: "cascade"});
+Comment.belongsTo(User, {foreignKey:"userId"});
+Post.hasMany(Comment, {onDelete: "cascade"});
+Comment.belongsTo(Post, { foreignKey: "userId" })
+
 //un Post est publié sur un seul forum
 Post.belongsTo(Forum);
 
