@@ -39,7 +39,7 @@ const Home = () => {
             <AsideMenu className="card__home--aside-menu"/>
             <div className={classes["home__post-list"]}>
                 {
-                    posts.map(post => <Post key={post.id} text={post.text} imageUrl={post.imageUrl} author={post.user} forum={post.forumId} id={post.id}/>)
+                    posts.map(post => <Post key={post.id} text={post.text} imageUrl={post.imageUrl} author={post.user} forum={post.forumId} id={post.id} comments={post.comments}/>)
                 }
             </div>
         </Fragment>

@@ -61,7 +61,10 @@ exports.deletePost = (req,res,next) => {
 }
 
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll({include: User})
+    Post.findAll({include: [User, {
+        model: Comment,
+        include: User
+    }]})
     .then(posts => res.status(200).json(posts))
     .catch(error => res.status(400).json({error}))
 };

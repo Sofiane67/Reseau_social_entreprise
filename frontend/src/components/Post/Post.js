@@ -1,18 +1,18 @@
-import {Fragment, useEffect, useState} from "react";
+import {Fragment} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 import FormPost from "../FormPost/FormPost";
 import ButtonsModal from "../ButtonModal/ButtonsModal";
+import Author from "../Author/Author";
+import Comment from "../Comment/Comment";
 import classes from "./Post.module.scss";
-import {dateFormat} from "../../utils/funcsHelper";
 import {showModal} from "../../redux/actions/modal/actions";
-import { formData } from "../../utils/funcsHelper";
 
 const Post = props => {
     const dispatch = useDispatch();
-    const postDataStored = useSelector(state => state.formInputValue);
     const userId = useSelector(store => store.login.userId);
+    const posts = useSelector(store => store.posts)
 
     const {
         name,
@@ -24,7 +24,8 @@ const Post = props => {
 
     const {
         forum: forumId,
-        id: postId
+        id: postId,
+        comments
     } = props;
 
     const isAuthor = authorId === userId;
@@ -65,29 +66,20 @@ const Post = props => {
             content: <FormPost action="add_comment"><ButtonsModal nameButton="Commenter"/> </FormPost>
         }))
     }
- 
+
+    // console.log(props.comments)
+   
     return (
         <Fragment>
             <Card className="card__post">
-                <div className={classes["post__head"]}>
-                    <div className={classes["post__avatar-box"]}>
-                        <p className={classes["post__avatar--initial"]}>{`${firstName[0]}${name[0]}`}</p>
-                    </div>
-                    <div className={classes["post__info"]}>
-                        <p className={classes["post__author"]}>{`${name} ${firstName}`}</p>
-                        <p className={classes["post__date"]}>
-                            <span>Créé le {dateFormat(createdAt)}</span>
-                            {updatedAt !== createdAt && `Modifié le ${dateFormat(updatedAt)}`}
-                        </p>
-                    </div>
-                </div>
+                <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt}/>
                 <p className={classes["post__text"]}>{props.text}</p>
                 {
                     props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={classes["post__img"]} alt=""/></div>
                 }
 
                 <div className={classes["post__stat-post"]}>
-                    <p>0 commentaire</p>
+                    <p>{props.comments.length} commentaire{props.comments.length > 1 && "s"}</p>
                     <p>0 partage</p>
                 </div>
                 <div className={classes["post__action"]}>
@@ -96,6 +88,19 @@ const Post = props => {
                     {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
                     {isAuthor && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
                 </div>
+                {
+                    comments.map(comment => {
+                        const {
+                            name: nameComment,
+                            firstName: firstNameComment,
+                            createdAt: createdAtComment,
+                            updatedAt: updatedAtComment,
+                            id: userIdComment
+                        } = comment.user;
+
+                        return <Comment key={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
+                    })
+                }
             </Card>
         </Fragment>
     )
