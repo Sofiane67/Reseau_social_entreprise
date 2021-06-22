@@ -4,13 +4,13 @@ export const modal = (state = initialState, action) => {
     let newState; 
     switch (action.type) {
         case SHOW_MODAL:
+            
             newState = {
                 ...state,
                 ...action.value
             }
             break;
         case DELETE_POST:
-            console.log(action.value);
             newState = {
                 ...action.value
             }
@@ -19,5 +19,6 @@ export const modal = (state = initialState, action) => {
         default:
             return state;
     }
+    
     return newState;
 };

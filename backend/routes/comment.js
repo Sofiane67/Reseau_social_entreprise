@@ -4,7 +4,7 @@ const commentController = require("../controllers/comment");
 const auth = require('../middleware/auth');
 
 router.post("/:forumId/:postId", commentController.addComment);
-router.put("/:forumId/:postId/:commentId", commentController.editComment);
+router.put("/:commentId", commentController.editComment);
 router.delete("/:forumId/:postId", commentController.deleteComment);
 router.get("/:forumId/:postId", commentController.getAllComments);
 

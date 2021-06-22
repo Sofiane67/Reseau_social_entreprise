@@ -12,7 +12,6 @@ import {showModal} from "../../redux/actions/modal/actions";
 const Post = props => {
     const dispatch = useDispatch();
     const userId = useSelector(store => store.login.userId);
-    const posts = useSelector(store => store.posts)
 
     const {
         name,
@@ -95,10 +94,10 @@ const Post = props => {
                             firstName: firstNameComment,
                             createdAt: createdAtComment,
                             updatedAt: updatedAtComment,
-                            id: userIdComment
+                            id: userIdComment,
                         } = comment.user;
 
-                        return <Comment key={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
+                        return <Comment key={comment.id} commentId={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
                     })
                 }
             </Card>

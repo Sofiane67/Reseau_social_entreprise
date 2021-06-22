@@ -1,10 +1,9 @@
-import {Fragment, useState} from "react";
+import { Fragment, useState, useEffect} from "react";
 import Form from "../Form/Form";
 import FormGroup from "../FormGroup/FormGroup";
 import Input from "../UI/Input/Input";
 import InputFile from "../UI/Input/inputFile/inputFile";
 import Textarea from "../UI/Textarea/Textarea";
-import {useEffect} from "react";
 import classes from "./FormPost.module.scss";
 import {formFieldPost} from "../../utils/formFields";
 import {formData} from "../../utils/funcsHelper";
@@ -12,7 +11,7 @@ import {GET_POST_TEXT, GET_POST_IMAGE} from "../../redux/actions/form/type";
 import {useSelector, useDispatch} from "react-redux";
 import { addPost } from "../../redux/actions/posts/actions";
 import { editPost } from "../../redux/actions/posts/actions";
-import { addComment } from "../../redux/actions/comments/actions";
+import { addComment, editComment} from "../../redux/actions/comments/actions";
 
 const FormPost = props => {
 
@@ -21,7 +20,7 @@ const FormPost = props => {
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const [isShow, setIsShow] = useState(false);
     const modal = useSelector(store => store.modal);
-    const { forumId, postId } = modal;
+    const { forumId, postId, commentId} = modal;
     const action = props.action ? props.action : "add";
     const data = postDataStored.imageUrl ? formData(postDataStored) : {text: postDataStored.text};
 
@@ -36,6 +35,9 @@ const FormPost = props => {
                     break;
                 case "add_comment":
                     dispatch(addComment(data, forumId, postId));
+                    break;
+                case "edit_comment":
+                    dispatch(editComment(data,commentId));
                     break;
                 default:
                     break;

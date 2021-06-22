@@ -14,7 +14,14 @@ exports.addComment = (req, res, next) => {
 };
 
 exports.editComment = (req, res, next) => {
-
+    const commentId = req.params.commentId;
+    Comment.findByPk(commentId)
+    .then(comment => {
+        comment.text = req.body.text;
+        return comment.save();
+    })
+    .then(() => res.status(200).json({ message: "Commentaire modifié" }))
+    .catch(error => res.status(400).json({ error }));
 };
 
 exports.deleteComment = (req, res, next) => {
