@@ -25,7 +25,16 @@ const Comment = props => {
             sql: "update",
             content: <FormPost action="edit_comment" ><ButtonsModal nameButton="Modifier" /> </FormPost>
         }))
-    }
+    };
+
+    const showDeleteModalHandler = e => {
+        dispatch(showModal({
+            ...modalContent,
+            nameButton: "Supprimer",
+            sql: "delete",
+            content: "Confirmez vous la suppression de votre commentaire ?"
+        }))
+    };
 
     return (
         <div className={classes.comment}>
@@ -35,7 +44,7 @@ const Comment = props => {
             {isAuthor && (
                 <div className={classes["comment__action-box"]}>
                     <span className={`${classes["comment__action"]} ${classes["comment__action--edit"]}`} onClick={showUpdateModalHander}>Modifier</span>
-                    <span className={`${classes["comment__action"]} ${classes["comment__action--delete"]}`}>Supprimer</span>
+                    <span className={`${classes["comment__action"]} ${classes["comment__action--delete"]}`} onClick={showDeleteModalHandler}>Supprimer</span>
                 </div>
             )}
             

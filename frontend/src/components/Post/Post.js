@@ -41,7 +41,7 @@ const Post = props => {
     const showDeleteModalHandler = e => {
         dispatch(showModal({
             ...modalContent,
-            nameButton: e.target.innerText,
+            nameButton: "Supprimer",
             type: "post",
             forumId,
             postId,

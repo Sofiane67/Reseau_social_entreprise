@@ -3,7 +3,6 @@ const Comment = require("../models/comment");
 exports.addComment = (req, res, next) => {
     const postId = req.params.postId;
     req.body.text = req.body.text === "" ? null : req.body.text;
-    console.log(req.body)
     Comment.create({
         ...req.body,
         postId,
@@ -25,7 +24,11 @@ exports.editComment = (req, res, next) => {
 };
 
 exports.deleteComment = (req, res, next) => {
-
+    const commentId = req.params.commentId;
+    Comment.findByPk(commentId)
+        .then(comment => {console.log(comment); return comment.destroy()})
+        .then(() => res.status(200).json({ message: "Commentaire supprimé" }))
+        .catch(error => res.status(400).json({ error }));
 }
 
 exports.getAllComments = (req, res, next) => {

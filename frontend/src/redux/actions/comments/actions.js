@@ -4,9 +4,9 @@ import { FORM_IS_SENDED } from "../form/type";
 import { ERROR } from "../form/type";
 import { SHOW_MODAL } from "../modal/types";
 
-export const addComment = (comment ,forumId, postId) => {
+export const addComment = (comment,postId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/comments/${forumId}/${postId}`, "POST", comment);
+        const response = httpRequest(`http://localhost:3000/api/comments/${postId}`, "POST", comment);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {
@@ -20,7 +20,6 @@ export const addComment = (comment ,forumId, postId) => {
 
 export const editComment = (comment, commentId) => {
     return dispatch => {
-        console.log(comment, commentId)
         const response = httpRequest(`http://localhost:3000/api/comments/${commentId}`, "PUT", comment);
         response().then(data => {
             dispatch(getAllPosts());
@@ -32,3 +31,14 @@ export const editComment = (comment, commentId) => {
         dispatch({ type: SHOW_MODAL, value: { isShow: false } });
     }
 }
+
+export const deleteComment = (commentId) => {
+    console.log("SUPPRIMER")
+    return dispatch => {
+        const res = httpRequest(`http://localhost:3000/api/comments/${commentId}`, "DELETE");
+        res().then(res => {
+            dispatch(getAllPosts());
+            dispatch({ type: SHOW_MODAL, value: { isShow: false } })
+        })
+    }
+};

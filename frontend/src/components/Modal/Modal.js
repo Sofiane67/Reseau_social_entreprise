@@ -5,6 +5,7 @@ import Card from "../UI/Card/Card";
 import ButtonsModal from "../ButtonModal/ButtonsModal";
 import classes from "./Modal.module.scss";
 import {deletePost} from "../../redux/actions/posts/actions";
+import { deleteComment } from "../../redux/actions/comments/actions";
 
 const BackDrop = props => <div className={classes.backdrop} onClick={props.onBackDrop}></div>;
 
@@ -16,7 +17,9 @@ const ModalOverlay = props => {
             case "post":
                 dispatch(deletePost(modal.forumId, modal.postId));
                 break;
-        
+            case "comment":
+                dispatch(deleteComment(modal.commentId));
+                break;
             default:
                 break;
         }
@@ -25,7 +28,7 @@ const ModalOverlay = props => {
         <Fragment>
             <Card className="card__modal">
                 <div className={classes["modal__message"]}>{modal.content}</div>
-                {(modal.sql == "delete" && modal.type !== "comment") && <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>}
+                {(modal.sql == "delete") && <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>}
             </Card>
         </Fragment>   
     )
