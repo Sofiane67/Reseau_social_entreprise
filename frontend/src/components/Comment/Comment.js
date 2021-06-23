@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FormPost from "../FormPost/FormPost";
 import ButtonsModal from "../ButtonModal/ButtonsModal";
 import { useDispatch,useSelector } from "react-redux";
@@ -5,12 +6,11 @@ import classes from "./Comment.module.scss";
 import { showModal } from "../../redux/actions/modal/actions";
 
 const Comment = props => {
+    const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
     const userId = useSelector(store => store.login.userId);
-    const modal = useSelector(store => store.modal);
     const dispatch = useDispatch();
     const authorId = props.userId;
     const isAuthor = authorId === userId;
-
     const modalContent = {
         isShow: true,
         nameButton: "",
@@ -36,11 +36,21 @@ const Comment = props => {
         }))
     };
 
+    const classeText = props.text.length >= 400 ? `${classes["comment__text"]} ${classes["comment__text--overflow"]}` : classes["comment__text"];
+    const commentElem = `#comment-${props.commentId}`;
+    
+    const showMoreCommentHandler = e => {
+        document.querySelector(commentElem).classList.toggle(classes["comment__text--overflow"]);
+        nameBtnLearnMore === "Afficher plus" ? setNameBtnLearnMore("Afficher moins"): setNameBtnLearnMore("Afficher plus");
+    };
+
     return (
         <div className={classes.comment}>
-            {/* <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt} /> */}
             {props.children}
-            <p className={classes["comment__text"]}>{props.text}</p>
+            <div className={classes["comment__text-box"]}>
+                <p id={`comment-${props.commentId}`} className={classeText}>{props.text}</p>
+                {props.text.length >= 400 && <span className={`${classes["comment__action"]} ${classes["comment__action--learn-more"]}`} onClick={showMoreCommentHandler}>{nameBtnLearnMore}</span>}
+            </div>
             {isAuthor && (
                 <div className={classes["comment__action-box"]}>
                     <span className={`${classes["comment__action"]} ${classes["comment__action--edit"]}`} onClick={showUpdateModalHander}>Modifier</span>

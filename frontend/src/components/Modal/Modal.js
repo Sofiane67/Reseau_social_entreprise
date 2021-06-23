@@ -24,11 +24,12 @@ const ModalOverlay = props => {
                 break;
         }
     }
+
     return (
         <Fragment>
             <Card className="card__modal">
                 <div className={classes["modal__message"]}>{modal.content}</div>
-                {(modal.sql == "delete") && <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>}
+                {(modal.sql == "delete") ? <ButtonsModal onClick={confirmHandler} nameButton={modal.nameButton}/>:""}
             </Card>
         </Fragment>   
     )

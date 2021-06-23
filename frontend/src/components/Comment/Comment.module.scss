@@ -1,25 +1,50 @@
 .comment{
     margin: 4rem 0;
-    &__text{
-        text-align: justify;
+
+    &__text-box{
         background-color: #FAFAFA;
         border-radius: 1.5rem;
-        padding: 3rem;
+        padding: 1rem 3rem;
+        height: auto;  
+    }
+
+    &__text{
+        text-align: justify;
+    }
+
+    &__text--overflow{
+        display: -webkit-box;
+        display: -moz-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        & ~ .comment__action--learn-more{
+            display: inline-block;
+        }
     }
 
     &__action-box{
         display: flex;
         justify-content: flex-start;
-        font-weight: 600;
-        font-size: 1.5rem;
         margin: 5px 0;
     }
 
     &__action{
+        font-weight: 600;
+        font-size: 1.5rem;
         margin: 0 1.5rem;
         &:hover{
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        &--learn-more{
+
+            display: inline-block;
+            margin: 1rem 0 0 auto;
         }
     }
 }

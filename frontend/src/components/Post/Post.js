@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import {Fragment,useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
@@ -12,7 +12,7 @@ import {showModal} from "../../redux/actions/modal/actions";
 const Post = props => {
     const dispatch = useDispatch();
     const userId = useSelector(store => store.login.userId);
-
+    const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
     const {
         name,
         firstName,
@@ -66,19 +66,37 @@ const Post = props => {
         }))
     }
 
-    // console.log(props.comments)
+    const classeText = props.text.length >= 400 ? `${classes["post__text"]} ${classes["post__text--overflow"]}` : classes["post__text"];
+    const postElem = `#post-${postId}`;
+
+    const showMorePostHandler = e => {
+        document.querySelector(postElem).classList.toggle(classes["post__text--overflow"]);
+        nameBtnLearnMore === "Afficher plus" ? setNameBtnLearnMore("Afficher moins") : setNameBtnLearnMore("Afficher plus");
+    };
+    
+    const commentsBoxElem = `#comments-${postId}`;
+    const a = classes["post__comments"];
+    const showAllCommentsHandler = e => {
+        document.querySelector(commentsBoxElem).classList.remove(classes["post__comments--hidden"]);
+        document.querySelector(commentsBoxElem).classList.add(a)
+        nameBtnLearnMore === "Afficher plus" ? setNameBtnLearnMore("Afficher moins") : setNameBtnLearnMore("Afficher plus");
+    };
    
     return (
         <Fragment>
             <Card className="card__post">
                 <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt}/>
-                <p className={classes["post__text"]}>{props.text}</p>
+                
+                <div className={classes["post__text-box"]}>
+                    <p id={`post-${postId}`} className={classeText}>{props.text}</p>
+                    {props.text.length >= 400 && <span className={classes["post__learn-more"]} onClick={showMorePostHandler}>{nameBtnLearnMore}</span>}
+                </div>
                 {
                     props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={classes["post__img"]} alt=""/></div>
                 }
 
                 <div className={classes["post__stat-post"]}>
-                    <p>{props.comments.length} commentaire{props.comments.length > 1 && "s"}</p>
+                    <span onClick={showAllCommentsHandler} className={classes["post__stat-comment"]}>{props.comments.length} commentaire{props.comments.length > 1 && "s"}</span>
                     <p>0 partage</p>
                 </div>
                 <div className={classes["post__action"]}>
@@ -87,19 +105,21 @@ const Post = props => {
                     {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
                     {isAuthor && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
                 </div>
-                {
-                    comments.map(comment => {
-                        const {
-                            name: nameComment,
-                            firstName: firstNameComment,
-                            createdAt: createdAtComment,
-                            updatedAt: updatedAtComment,
-                            id: userIdComment,
-                        } = comment.user;
+                <div id={`comments-${postId}`} className={`${classes["post__comments--hidden"]}`}>
+                    {
+                        comments.map(comment => {
+                            const {
+                                name: nameComment,
+                                firstName: firstNameComment,
+                                createdAt: createdAtComment,
+                                updatedAt: updatedAtComment,
+                                id: userIdComment,
+                            } = comment.user;
 
-                        return <Comment key={comment.id} commentId={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
-                    })
-                }
+                            return <Comment key={comment.id} commentId={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
+                        })
+                    }
+                </div>
             </Card>
         </Fragment>
     )

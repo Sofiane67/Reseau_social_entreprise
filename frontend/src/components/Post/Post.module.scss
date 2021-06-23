@@ -1,7 +1,30 @@
 .post{
+    &__text-box{
+        border-radius: 1.5rem;
+        padding: 3rem;
+        height: auto;  
+    }
+
     &__text{
-        padding: 2rem 0;
         text-align: justify;
+
+        &--overflow{
+            display: -webkit-box;
+            display: -moz-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            & ~ .post__learn-more{
+                display: inline-block;
+            }
+        }
+    }
+
+    &__img-box{
+        height: 35rem;
     }
 
     &__img{
@@ -26,7 +49,48 @@
         border-bottom: 1px solid #F2F2F2;
         display: flex;
     }
-}
-img{
-    width: 100%;
+
+    &__learn-more{
+        display: inline-block;
+        margin: 1rem 0 0 auto;
+        font-weight: 600;
+        font-size: 1.5rem;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    &__comments{
+        max-height: 40rem;
+        transition: max-height .5s;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar-track{
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar{
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            background-color: rgb(128, 125, 125);
+        }
+
+        &--hidden{
+            max-height: 0;
+            overflow: hidden;
+        }
+    }
+
+    &__stat-comment{
+        display: inline-block;
+        margin: 0 2rem;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
 }
