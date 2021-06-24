@@ -5,15 +5,24 @@ import Grid from "./components/layout/Grid/Grid";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home/Home";
+import Account from "./pages/Account/Account";
 import Header from "./components/layout/Header/Header";
 import Navigation from "./components/layout/Navigation/Navigation";
 import MainNavigationLink from "./components/MainMenuLink/MainMenuLink";
 import Modal from "./components/Modal/Modal";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { getUserProfil } from "./redux/actions/user/actions";
 
 
 const App = () => {
+    const dispatch = useDispatch();
     const modalIsShow = useSelector(store => store.modal.isShow);
+    const login = useSelector(store => store.login);
+    const {isLoggedIn, userId} = login;
+
+    if(isLoggedIn){
+        dispatch(getUserProfil(userId));
+    }
 
     return (
         <Grid>
@@ -33,6 +42,9 @@ const App = () => {
                     </Route>
                     <Route path="/home">
                         <Home />
+                    </Route>
+                    <Route path="/account">
+                        <Account/>
                     </Route>
                     <Route path="/logout">
                         <Redirect to="/" />

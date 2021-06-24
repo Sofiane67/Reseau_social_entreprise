@@ -16,7 +16,7 @@ export const formFieldLogin = {
     }
 };
 
-export const formFieldSignUp = {
+export const formFieldUser = {
     name: {
         htmlFor: "name",
         label: "Nom",

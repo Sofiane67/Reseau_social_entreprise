@@ -5,7 +5,7 @@ import FormGroup from "../components/FormGroup/FormGroup";
 import Input from "../components/UI/Input/Input";
 import Button from "../components/UI/Button/Button";
 
-import { formFieldSignUp} from "../utils/formFields";
+import { formFieldUser} from "../utils/formFields";
 import { GET_NAME, GET_FIRSTNAME, GET_EMAIL, GET_PASSWORD} from "../redux/actions/form/type";
 import {signup} from "../redux/actions/form/actions";
 
@@ -30,17 +30,17 @@ const SignUp = () => {
     
     return (
         <Form>
-            <FormGroup field={formFieldSignUp.name}>
-                <Input field={formFieldSignUp.name} action={GET_NAME} />
+            <FormGroup field={formFieldUser.name}>
+                <Input field={formFieldUser.name} action={GET_NAME} />
             </FormGroup>
-            <FormGroup field={formFieldSignUp.firstName} >
-                <Input field={formFieldSignUp.firstName} action={GET_FIRSTNAME} />
+            <FormGroup field={formFieldUser.firstName} >
+                <Input field={formFieldUser.firstName} action={GET_FIRSTNAME} />
             </FormGroup>
-            <FormGroup field={formFieldSignUp.email}>
-                <Input field={formFieldSignUp.email} action={GET_EMAIL} />
+            <FormGroup field={formFieldUser.email}>
+                <Input field={formFieldUser.email} action={GET_EMAIL} />
             </FormGroup>
-            <FormGroup field={formFieldSignUp.password}>
-                <Input field={formFieldSignUp.password} action={GET_PASSWORD} />
+            <FormGroup field={formFieldUser.password}>
+                <Input field={formFieldUser.password} action={GET_PASSWORD} />
             </FormGroup>
             <Button type="submit">Valider</Button>
             <p>{errorSignup && errorSignup}</p>

@@ -11,6 +11,10 @@ export const logoutNav = [
 
 export const loginNav = [
     {
+        name: "Mon compte",
+        path: "/account"
+    },
+    {
         name: "Déconnexion",
         path: "/logout"
     }
