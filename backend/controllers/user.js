@@ -59,10 +59,19 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(401).json({error}))
 };
 
-exports.profil = (req, res, next) => {
+exports.getUser = (req, res, next) => {
     const userId = req.params.userId;
 
     User.findByPk(userId)
     .then(user => res.status(200).json(user))
     .catch(error => res.status(400).json({ error }))
+}
+
+exports.deleteUser = (req, res, next) => {
+    const userId = req.params.userId;
+
+    User.findByPk(userId)
+    .then(user => user.destroy())
+    .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
+    .catch(error => res.status(400).json({ error }));
 }

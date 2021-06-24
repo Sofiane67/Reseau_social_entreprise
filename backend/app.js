@@ -86,8 +86,8 @@ app.use("/api/comments", commentRoutes);
 //un User ne peut avoir qu'un seul Role
 User.belongsTo(Role);
 //un User peut publier plusieurs Posts
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, { onDelete: "cascade" });
+Post.belongsTo(User, { foreignKey: "userId" });
 //un User peut partager plusieurs Post et un Post peut être partagé plusieurs fois
 User.belongsToMany(Post, {through: Sharing});
 
@@ -95,7 +95,7 @@ User.belongsToMany(Post, {through: Sharing});
 User.hasMany(Comment, { onDelete: "cascade"});
 Comment.belongsTo(User, {foreignKey:"userId"});
 Post.hasMany(Comment, {onDelete: "cascade"});
-Comment.belongsTo(Post, { foreignKey: "userId" })
+Comment.belongsTo(Post, { foreignKey: "postId" })
 
 //un Post est publié sur un seul forum
 Post.belongsTo(Forum);
