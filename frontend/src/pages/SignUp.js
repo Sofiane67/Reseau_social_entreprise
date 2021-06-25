@@ -10,6 +10,7 @@ const SignUp = () => {
     const dispatch = useDispatch();
     const formIsSended = useSelector(store => store.formInputValue.isSend);
     const userDataStrored = useSelector(store => store.formInputValue);
+    const isLoggedIn = useSelector(store => store.login.isLoggedIn);
 
     useEffect(()=>{
         if(formIsSended){
@@ -21,7 +22,7 @@ const SignUp = () => {
                 password: userDataStrored.password
             }
 
-            dispatch(signup(user));
+            !isLoggedIn && dispatch(signup(user));
         }
 
     },[formIsSended, userDataStrored, dispatch]); 

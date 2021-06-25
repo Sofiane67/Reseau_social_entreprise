@@ -75,3 +75,38 @@ exports.deleteUser = (req, res, next) => {
     .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
     .catch(error => res.status(400).json({ error }));
 }
+
+exports.editUser = (req, res, next) => {
+    const userId = req.params.userId;
+    User.findByPk(userId)
+    .then(user =>  {
+        if(req.body.password){
+            bcrypt.compare(req.body.password, user.password)
+            .then(isSame => {
+                if(isSame){
+                    delete req.body.password;
+                }
+            })
+        }
+        return user;
+    })
+    .then(user =>{
+        for (const prop in req.body) {
+            user[prop] = req.body[prop];
+        }
+        return user
+    })
+    .then(user => {
+       if(user.password){
+           bcrypt.hash(user.password, 10)
+           .then(hash => {
+               user.password = hash
+               user.save();
+               return res.status(200).json(user)
+            })
+       }else{
+           user.save();
+           return res.status(200).json(user);
+       }
+    })
+}

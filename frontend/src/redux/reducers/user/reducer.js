@@ -1,4 +1,4 @@
-import { DESTROY_SESSION, GET_USER_DATA } from "../../actions/user/types";
+import { DESTROY_SESSION, GET_USER_DATA, EDIT_USER} from "../../actions/user/types";
 
 const initialState = []
 
@@ -10,8 +10,13 @@ export const user = (state = initialState, action) => {
             newState = action.value
             break;
         case DESTROY_SESSION:
-            console.log(action)
             newState = action.value
+            break;
+        case EDIT_USER:
+            newState = {
+                ...state,
+                ...action.value
+            }
             break;
         default:
             return state;
