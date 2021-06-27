@@ -21,7 +21,8 @@ export const login = (state= initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 token: null,
-                userId: null
+                userId: null,
+                ...action.value
             }
             break;
         default:

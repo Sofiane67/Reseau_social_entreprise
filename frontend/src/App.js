@@ -13,7 +13,6 @@ import Modal from "./components/Modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import { getUserProfil } from "./redux/actions/user/actions";
 
-
 const App = () => {
     const dispatch = useDispatch();
     const modalIsShow = useSelector(store => store.modal.isShow);
@@ -34,24 +33,16 @@ const App = () => {
             </Header>
             <GuardProvider>
                 <Switch>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/signup">
-                        <SignUp />
-                    </Route>
-                    <Route path="/home">
-                        <Home />
-                    </Route>
-                    <Route path="/account">
-                        <Account/>
-                    </Route>
                     <Route path="/logout">
                         <Redirect to="/" />
                     </Route>
-                    <GuardedRoute path="/" component={Home} guards={[requireLogin]} meta={{auth:true}}/>
-                    <GuardedRoute path="/login" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
-                    
+                    <GuardedRoute path="/login" exact component={Login}/>
+                    <GuardedRoute path="/signup" exact component={SignUp}/>
+                    <GuardedRoute path="/home" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
+                    <GuardedRoute path="/account" exact component={Account} guards={[requireLogin]} meta={{ auth: true }} />
+                    <GuardedRoute path="/account" exact component={SignUp} guards={[requireLogin]} meta={{ auth: false }} />
+                    <GuardedRoute path="/" exact component={Home} guards={[requireLogin]} meta={{ auth: true }} />
+                    <GuardedRoute path="/" exact component={Login} guards={[requireLogin]} meta={{ auth: false }}/>
                 </Switch>
             </GuardProvider>
         </Grid>

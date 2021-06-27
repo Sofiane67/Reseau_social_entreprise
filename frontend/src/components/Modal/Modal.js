@@ -8,11 +8,13 @@ import classes from "./Modal.module.scss";
 import {deletePost} from "../../redux/actions/posts/actions";
 import { deleteComment } from "../../redux/actions/comments/actions";
 import {deleteUser} from "../../redux/actions/user/actions";
+import { LOGOUT } from "../../redux/actions/login/types";
 
 const BackDrop = props => <div className={classes.backdrop} onClick={props.onBackDrop}></div>;
 
 const ModalOverlay = props => {
     const dispatch = useDispatch();
+    const store = useSelector(store => store);
     const modal = useSelector(store => store.modal);
     const history = useHistory();
     const confirmHandler = () => {
@@ -24,7 +26,9 @@ const ModalOverlay = props => {
                 dispatch(deleteComment(modal.commentId));
                 break;
             case "account":
+                
                 dispatch(deleteUser(modal.userId));
+                dispatch({ type: LOGOUT, value: { isLoggedIn: false}})
                 history.push("/signup");
                 break;
             default:
