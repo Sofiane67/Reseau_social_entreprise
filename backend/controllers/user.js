@@ -88,17 +88,20 @@ exports.editUser = (req, res, next) => {
                 }
             })
         }
+        console.log("REQ BODY", req.body)
         return user;
     })
     .then(user =>{
+        console.log("BEFOR LOOP", req.body)
         for (const prop in req.body) {
             user[prop] = req.body[prop];
         }
+        console.log("AFTER LOOP", req.body)
         return user
     })
     .then(user => {
-       if(user.password){
-           bcrypt.hash(user.password, 10)
+       if(req.body.password){
+           bcrypt.hash(req.body.password, 10)
            .then(hash => {
                user.password = hash
                user.save();

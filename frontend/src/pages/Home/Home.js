@@ -16,6 +16,12 @@ const Home = () => {
     const dispatch = useDispatch();
     const posts = useSelector(state => state.posts);
 
+    const formInputValueStore = useSelector(store => store.formInputValue)
+
+    if (formInputValueStore.error){
+        delete formInputValueStore.error
+    }
+    
     useEffect(() => {
         if(!isSended){
             dispatch(getAllPosts());
