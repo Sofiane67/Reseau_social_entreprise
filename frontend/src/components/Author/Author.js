@@ -16,7 +16,7 @@ const Author = props => {
                 <p className={classes["author__avatar--initial"]}>{`${firstName[0]}${name[0]}`}</p>
             </div>
             <div className={classes["author__info"]}>
-                <p className={classes["author__author"]}>{`${name} ${firstName}`}</p>
+                <p className={classes["author__author"]}>{`${firstName} ${name}`}</p>
                 <p className={classes["author__date"]}>
                     <span>Créé le {dateFormat(createdAt)}</span>
                     {updatedAt !== createdAt && `Modifié le ${dateFormat(updatedAt)}`}

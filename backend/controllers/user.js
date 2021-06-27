@@ -1,6 +1,8 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Post = require("../models/post");
+const fs = require("fs");
 require("dotenv").config();
 
 /**
@@ -70,7 +72,20 @@ exports.deleteUser = (req, res, next) => {
     const userId = req.params.userId;
 
     User.findByPk(userId)
-    .then(user => user.destroy())
+    .then(user => {
+        Post.findAll({where: {userId}})
+        .then(posts => {
+            posts.map(post => {
+                if (post.imageUrl) {
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        return;
+                    })
+                }
+            })
+        });
+        return user.destroy()
+    })
     .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
     .catch(error => res.status(400).json({ error }));
 }
