@@ -20,7 +20,6 @@ export const getUserProfil = userId =>{
 
 export const deleteUser = userId => {
     return dispatch => {
-        console.log("DELETE USER");
         const response = httpRequest(`http://localhost:3000/api/auth/${userId}`, "DELETE");
         response().then(() => {
             dispatch({ type: LOGOUT})
@@ -34,7 +33,6 @@ export const editUser = (user, userId) => {
     return dispatch => {
         const response = httpRequest(`http://localhost:3000/api/auth/${userId}`, "PUT", user);
         response().then(data => {
-            console.log(data)
             dispatch({ type: EDIT_USER, value: data.data});
             if (data.error) {
                 dispatch({ type: ERROR, message: data.error.errors[0].message })

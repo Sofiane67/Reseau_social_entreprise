@@ -10,7 +10,6 @@ export const login = userDataConnect => {
         response().then(data =>{
            
             if(data.error) {
-                console.log(data.error)
                 throw new Error(data.error)
             }
 

@@ -33,7 +33,6 @@ export const editComment = (comment, commentId) => {
 }
 
 export const deleteComment = (commentId) => {
-    console.log("SUPPRIMER")
     return dispatch => {
         const res = httpRequest(`http://localhost:3000/api/comments/${commentId}`, "DELETE");
         res().then(res => {

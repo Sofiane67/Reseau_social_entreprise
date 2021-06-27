@@ -10,7 +10,6 @@ require("dotenv").config();
  * @param {*} next 
  */
 exports.signup = (req, res, next) => {
-    console.log(req.body)
     const { name, firstName, email, password } = req.body;
     bcrypt.hash(password, 10)
     .then(hash => {
@@ -88,15 +87,12 @@ exports.editUser = (req, res, next) => {
                 }
             })
         }
-        console.log("REQ BODY", req.body)
         return user;
     })
     .then(user =>{
-        console.log("BEFOR LOOP", req.body)
         for (const prop in req.body) {
             user[prop] = req.body[prop];
         }
-        console.log("AFTER LOOP", req.body)
         return user
     })
     .then(user => {
