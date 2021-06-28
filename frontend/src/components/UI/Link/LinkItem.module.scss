@@ -1,25 +1,25 @@
 .navLink{
-        font-weight: 600;
-        // border-bottom: solid;
-    
+    font-weight: 600;
+    // border-bottom: solid;
+
+    &::after{
+        content: "";
+        display: block;
+        height: 3px;
+        width: 0;
+        background-color: #FD2D01;
+        transition: all .3s;
+    }
+
+    &:hover{
+        color: #FD2D01;
+
         &::after{
-            content: "";
-            display: block;
-            height: 3px;
-            width: 0;
-            background-color: #FD2D01;
-            transition: all .3s;
-        }
-
-        &:hover{
-            color: #FD2D01;
-
-            &::after{
-                width: 100%;
-            }
-        }
-
-        &--active{
-            color: #FD2D01;
+            width: 100%;
         }
     }
+
+    &--active{
+        color: #FD2D01;
+    }
+}

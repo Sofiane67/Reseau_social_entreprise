@@ -61,6 +61,7 @@ exports.deletePost = (req,res,next) => {
 }
 
 exports.getAllPosts = (req, res, next) => {
+    const forumId = req.params.forumId;
     Post.findAll(
         {
             include: [
@@ -70,6 +71,7 @@ exports.getAllPosts = (req, res, next) => {
                     order: [["createdAt", 'DESC']]
                 }
             ],
+            where:forumId && {forumId},
             order: [
                 ["createdAt",'DESC'],
                 [Comment, "createdAt", "DESC"]

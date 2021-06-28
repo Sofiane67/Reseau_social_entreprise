@@ -14,7 +14,6 @@ import { editPost } from "../../redux/actions/posts/actions";
 import { addComment, editComment} from "../../redux/actions/comments/actions";
 
 const FormPost = props => {
-
     const dispatch = useDispatch();
     const postDataStored = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
@@ -23,12 +22,13 @@ const FormPost = props => {
     const { forumId, postId, commentId} = modal;
     const action = props.action ? props.action : "add";
     const data = postDataStored.imageUrl ? formData(postDataStored) : {text: postDataStored.text};
+    const {forum} = props;
 
     useEffect(() => {
         if(formIsSended){
             switch (action) {
                 case "add":
-                    dispatch(addPost(data));
+                    dispatch(addPost(data, forum));
                     break;
                 case "edit": 
                     dispatch(editPost(data, forumId, postId));

@@ -4,9 +4,9 @@ import { SHOW_MODAL } from "../modal/types";
 import { ERROR } from "../form/type";
 import {GET_ALL_POST} from "./types";
 
-export const getAllPosts = () => {
+export const getAllPosts = (forumId = "") => {
     return dispatch => {
-        const res = httpRequest("http://localhost:3000/api/posts", "GET");
+        const res = httpRequest(`http://localhost:3000/api/posts/${forumId}`, "GET");
         res().then(res => {
             const {data} = res;
             dispatch({
@@ -18,9 +18,9 @@ export const getAllPosts = () => {
     }
 };
 
-export const addPost = post => {
+export const addPost = (post, forumId) => {
     return dispatch => {
-        const response = httpRequest("http://localhost:3000/api/posts/1", "POST", post);
+        const response = httpRequest(`http://localhost:3000/api/posts/${forumId}`, "POST", post);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {

@@ -1,0 +1,15 @@
+@import "../../sass/utils.scss";
+
+.templateAllPosts{
+
+    &__post-list{
+        grid-column: col-start 2/col-end 5;
+        display: grid;
+        grid-gap: 3rem;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            grid-column: center-start/center-end;
+            grid-row: 4/5;
+        }
+    }
+}

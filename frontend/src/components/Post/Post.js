@@ -6,10 +6,15 @@ import FormPost from "../FormPost/FormPost";
 import ButtonsModal from "../ButtonModal/ButtonsModal";
 import Author from "../Author/Author";
 import Comment from "../Comment/Comment";
+import Icon from "../Icon/Icon";
 import classes from "./Post.module.scss";
 import {showModal} from "../../redux/actions/modal/actions";
 
+import iconText from "../../images/icons/text-icon.svg";
+import iconMultimedia  from "../../images/icons/multimedia-icon.svg";
+
 const Post = props => {
+    
     const dispatch = useDispatch();
     const userId = useSelector(store => store.login.userId);
     const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
@@ -85,6 +90,7 @@ const Post = props => {
     return (
         <Fragment>
             <Card className="card__post">
+                <Icon icon={forumId == 1 ? iconMultimedia : iconText} />
                 <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt}/>
                 
                 <div className={classes["post__text-box"]}>

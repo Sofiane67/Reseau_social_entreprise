@@ -1,0 +1,12 @@
+.icon{
+    &__icon-box{
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translate(-100%, 100%);
+    }
+
+    &__img{
+        height: 25px;
+    }
+}

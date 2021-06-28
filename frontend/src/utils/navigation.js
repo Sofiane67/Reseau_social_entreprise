@@ -22,11 +22,15 @@ export const loginNav = [
 
 export const asideForumNav = [
     {
+        name: "Accueil",
+        path: "/home"
+    },
+    {
         name: "Multimedia",
         path: "/multimedia"
     },
     {
         name: "Texte",
-        path: "/texte"
+        path: "/text"
     },
 ]

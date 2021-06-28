@@ -12,6 +12,8 @@ import MainNavigationLink from "./components/MainMenuLink/MainMenuLink";
 import Modal from "./components/Modal/Modal";
 import {useDispatch, useSelector} from "react-redux";
 import { getUserProfil } from "./redux/actions/user/actions";
+import Multimedia from "./pages/Multimedia/Multimedia";
+import Text from "./pages/Text/Text";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -39,6 +41,8 @@ const App = () => {
                     <GuardedRoute path="/login" exact component={Login}/>
                     <GuardedRoute path="/signup" exact component={SignUp}/>
                     <GuardedRoute path="/home" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
+                    <GuardedRoute path="/multimedia" exact component={Multimedia} guards={[requireLogin]} meta={{ auth: true }} />
+                    <GuardedRoute path="/text" exact component={Text} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/account" exact component={Account} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/account" exact component={SignUp} guards={[requireLogin]} meta={{ auth: false }} />
                     <GuardedRoute path="/" exact component={Home} guards={[requireLogin]} meta={{ auth: true }} />
