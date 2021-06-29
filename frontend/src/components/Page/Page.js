@@ -38,9 +38,11 @@ const Page = props => {
 
     return (
         <Fragment>
-            <Card className="card__home--form">
-                <Button onClick={showModaHandler}>Ajouter un post</Button>
-            </Card>
+            {forumId && (
+                <Card className="card__home--form">
+                    <Button onClick={showModaHandler}>Ajouter un post</Button>
+                </Card>
+            )}
             <TemplateAllPosts />
         </Fragment>
     )

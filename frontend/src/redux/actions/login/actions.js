@@ -5,7 +5,7 @@ import { FORM_IS_SENDED } from "../form/type";
 
 export const login = userDataConnect => {
     return dispatch => {
-        const response = httpRequest("http://localhost:3000/api/auth/login", "POST", userDataConnect);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/login`, "POST", userDataConnect);
         
         response().then(data =>{
            

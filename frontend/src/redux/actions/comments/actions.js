@@ -6,7 +6,7 @@ import { SHOW_MODAL } from "../modal/types";
 
 export const addComment = (comment,postId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/comments/${postId}`, "POST", comment);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${postId}`, "POST", comment);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {
@@ -20,7 +20,7 @@ export const addComment = (comment,postId) => {
 
 export const editComment = (comment, commentId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/comments/${commentId}`, "PUT", comment);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${commentId}`, "PUT", comment);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {
@@ -34,7 +34,7 @@ export const editComment = (comment, commentId) => {
 
 export const deleteComment = (commentId) => {
     return dispatch => {
-        const res = httpRequest(`http://localhost:3000/api/comments/${commentId}`, "DELETE");
+        const res = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${commentId}`, "DELETE");
         res().then(res => {
             dispatch(getAllPosts());
             dispatch({ type: SHOW_MODAL, value: { isShow: false } })

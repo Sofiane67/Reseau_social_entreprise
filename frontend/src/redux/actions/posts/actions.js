@@ -6,7 +6,7 @@ import {GET_ALL_POST} from "./types";
 
 export const getAllPosts = (forumId = "") => {
     return dispatch => {
-        const res = httpRequest(`http://localhost:3000/api/posts/${forumId}`, "GET");
+        const res = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}`, "GET");
         res().then(res => {
             const {data} = res;
             dispatch({
@@ -20,7 +20,7 @@ export const getAllPosts = (forumId = "") => {
 
 export const addPost = (post, forumId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/posts/${forumId}`, "POST", post);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}`, "POST", post);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {
@@ -34,7 +34,7 @@ export const addPost = (post, forumId) => {
 
 export const editPost = (post,forumId, postId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/posts/${forumId}/${postId}`, "PUT", post);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}/${postId}`, "PUT", post);
         response().then(data => {
             dispatch(getAllPosts());
             if (data.error) {
@@ -48,7 +48,7 @@ export const editPost = (post,forumId, postId) => {
 
 export const deletePost = (forumId, postId) => {
     return dispatch => {
-        const res = httpRequest(`http://localhost:3000/api/posts/${forumId}/${postId}`, "DELETE");
+        const res = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}/${postId}`, "DELETE");
         res().then(res => {
             dispatch(getAllPosts());
             dispatch({type: SHOW_MODAL, value: {isShow: false}})

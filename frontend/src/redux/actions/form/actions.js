@@ -3,7 +3,7 @@ import {FORM_IS_SENDED, ERROR} from "./type";
 
 export const signup = user => {
     return dispatch =>{
-        const response = httpRequest("http://localhost:3000/api/auth/signup", "POST", user);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/signup`, "POST", user);
         response().then(data => {
             if(data.error){
                 dispatch({ type: ERROR, message: data.error.errors[0].message })
