@@ -51,6 +51,7 @@
         z-index: 100;
         overflow: hidden;
         min-width: 32rem;
+        max-height: auto;
 
         & button{
             margin:0 1.5rem

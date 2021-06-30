@@ -15,6 +15,7 @@ const Input = props => {
         type={type} 
         name={name} 
         id={id} 
+        placeholder={props.placeholder}
         className={classes["form__input"]} 
         onChange={changeValueHandler}
         value={inputValue}

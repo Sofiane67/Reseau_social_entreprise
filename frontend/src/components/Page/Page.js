@@ -32,7 +32,7 @@ const Page = props => {
             isShow: true,
             type: "post",
             sql: "insert",
-            content: <FormPost forum={forumId} ><ButtonsModal nameButton="Publier" /> </FormPost>
+            content: <FormPost forum={forumId} rowSize={props.rowSize}><ButtonsModal nameButton="Publier" /> </FormPost>
         }))
     };
 

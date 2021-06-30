@@ -8,6 +8,7 @@ import {login} from "./reducers/login/reducer";
 import {posts} from "./reducers/posts/reducer";
 import {modal} from "./reducers/modal/reducer";
 import { user } from "./reducers/user/reducer";
+import { tenor } from "./reducers/tenor/reducer";
 
 const migrations = {
     1: state => ({
@@ -17,7 +18,7 @@ const migrations = {
 
 const persistConfig = {
     key: 'root',
-    blacklist: ['formInputValue', "posts", "modal", "user"],
+    blacklist: ['formInputValue', "posts", "modal", "user", "tenor"],
     storage,
     version: 1,
     migrate: createMigrate(migrations, {debug: true})
@@ -28,7 +29,8 @@ const reducers = () => combineReducers({
     login,
     posts,
     modal,
-    user
+    user,
+    tenor
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers());

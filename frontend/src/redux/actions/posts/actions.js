@@ -22,7 +22,7 @@ export const addPost = (post, forumId) => {
     return dispatch => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}`, "POST", post);
         response().then(data => {
-            dispatch(getAllPosts());
+            dispatch(getAllPosts(forumId));
             if (data.error) {
                 dispatch({ type: ERROR, message: data.error.errors[0].message })
             }
