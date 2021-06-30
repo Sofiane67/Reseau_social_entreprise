@@ -7,7 +7,7 @@ import { ERROR } from "../form/type";
 
 export const getUserProfil = userId =>{
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/auth/${userId}`, "GET");
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "GET");
         response().then(user => {
             const {data} = user;
             dispatch({
@@ -20,7 +20,7 @@ export const getUserProfil = userId =>{
 
 export const deleteUser = userId => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/auth/${userId}`, "DELETE");
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "DELETE");
         response().then(() => {
             dispatch({ type: LOGOUT})
             dispatch({ type: FORM_IS_SENDED, isSend: false });
@@ -31,7 +31,7 @@ export const deleteUser = userId => {
 
 export const editUser = (user, userId) => {
     return dispatch => {
-        const response = httpRequest(`http://localhost:3000/api/auth/${userId}`, "PUT", user);
+        const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "PUT", user);
         response().then(data => {
             dispatch({ type: EDIT_USER, value: data.data});
             if (data.error) {
