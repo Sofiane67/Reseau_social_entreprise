@@ -8,9 +8,11 @@ import { showModal } from "../../redux/actions/modal/actions";
 const Comment = props => {
     const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
     const userId = useSelector(store => store.login.userId);
+    const user = useSelector(store => store.user);
     const dispatch = useDispatch();
     const authorId = props.userId;
     const isAuthor = authorId === userId;
+    const isModerator = user.roleId == 1;
     const modalContent = {
         isShow: true,
         nameButton: "",
@@ -51,9 +53,9 @@ const Comment = props => {
                 <p id={`comment-${props.commentId}`} className={classeText}>{props.text}</p>
                 {props.text.length >= 400 && <span className={`${classes["comment__action"]} ${classes["comment__action--learn-more"]}`} onClick={showMoreCommentHandler}>{nameBtnLearnMore}</span>}
             </div>
-            {isAuthor && (
+            {(isAuthor || isModerator) && (
                 <div className={classes["comment__action-box"]}>
-                    <span className={`${classes["comment__action"]} ${classes["comment__action--edit"]}`} onClick={showUpdateModalHander}>Modifier</span>
+                    {isAuthor && <span className={`${classes["comment__action"]} ${classes["comment__action--edit"]}`} onClick={showUpdateModalHander}>Modifier</span>}
                     <span className={`${classes["comment__action"]} ${classes["comment__action--delete"]}`} onClick={showDeleteModalHandler}>Supprimer</span>
                 </div>
             )}

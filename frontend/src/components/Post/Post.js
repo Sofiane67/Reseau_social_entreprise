@@ -17,6 +17,7 @@ const Post = props => {
     
     const dispatch = useDispatch();
     const userId = useSelector(store => store.login.userId);
+    const user = useSelector(store => store.user);
     const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
     const {
         name,
@@ -33,6 +34,7 @@ const Post = props => {
     } = props;
 
     const isAuthor = authorId === userId;
+    const isModerator = user.roleId == 1;
 
     const modalContent = {
         isShow: true,
@@ -103,13 +105,11 @@ const Post = props => {
 
                 <div className={classes["post__stat-post"]}>
                     <span onClick={showAllCommentsHandler} className={classes["post__stat-comment"]}>{props.comments.length} commentaire{props.comments.length > 1 && "s"}</span>
-                    <p>0 partage</p>
                 </div>
                 <div className={classes["post__action"]}>
                     <Button className="button__post" onClick={showCommentModalHandler}>Commenter</Button>
-                    <Button className="button__post">Partager</Button>
                     {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
-                    {isAuthor && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
+                    {(isAuthor || isModerator) && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
                 </div>
                 <div id={`comments-${postId}`} className={`${classes["post__comments--hidden"]}`}>
                     {

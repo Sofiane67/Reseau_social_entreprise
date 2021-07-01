@@ -12,7 +12,7 @@ import { showModal } from "../../redux/actions/modal/actions";
 
 const Page = props => {
 
-    const isSended = useSelector(state => state.formInputValue.isSend);
+    const isSended = useSelector(store => store.formInputValue.isSend);
     const dispatch = useDispatch();
     const formInputValueStore = useSelector(store => store.formInputValue)
     const {forumId} = props;
