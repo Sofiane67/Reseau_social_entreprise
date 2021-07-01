@@ -53,10 +53,10 @@ app.post("/api/forum", (req, res, next) => {
     Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
 });
 
-// app.post("/api/role", (req, res, next) => {
-//     const roleName = req.body.roleName;
-//     Role.create({ roleName }).then(() => res.status(201).json({ message: "nouveau role créé" })).catch(err => res.status(500).json({ err }))
-// })
+app.post("/api/role", (req, res, next) => {
+    const roleName = req.body.roleName;
+    Role.create({ roleName }).then(() => res.status(201).json({ message: "nouveau role créé" })).catch(err => res.status(500).json({ err }))
+})
 //****************************************************************************************************************************
 //****************************************************************************************************************************
 let userId;

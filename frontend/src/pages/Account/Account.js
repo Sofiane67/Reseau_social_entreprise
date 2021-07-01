@@ -13,6 +13,7 @@ const Account = () => {
     const user = useSelector(store => store.user);
     const formIsSend = useSelector(store => store.formInputValue.isSend);
     const userDataStrored = useSelector(store => store.formInputValue);
+    const error = useSelector(store => store.formInputValue.error);
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Account = () => {
     }
 
     const showFieldsFormToUpdateHandler = () =>  setUpdate(true);
-
+    
     return (
         <Fragment>
             <AsideMenu className="card__home--aside-menu"/>
@@ -49,6 +50,7 @@ const Account = () => {
                 <h1>Mes informations</h1>
                 <Form>
                     <FormUser user={user} edit={update}/>
+                    {error && <p>L'adresse email est déjà uilisée</p>}
                     {update && <Button type="submit">Valider</Button>}
                 </Form>
                 <div>

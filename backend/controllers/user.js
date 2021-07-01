@@ -12,7 +12,7 @@ require("dotenv").config();
  * @param {*} next 
  */
 exports.signup = (req, res, next) => {
-    const { name, firstName, email, password } = req.body;
+    const { name, firstName, email, password} = req.body;
     bcrypt.hash(password, 10)
     .then(hash => {
         
@@ -20,7 +20,8 @@ exports.signup = (req, res, next) => {
             name,
             firstName,
             email,
-            password: hash
+            password: hash,
+            roleId: 2
         })
         .then(() => res.status(201).json({message : "Utilisateur créé"}))
         .catch(error => res.status(500).json({error}))
@@ -105,6 +106,7 @@ exports.editUser = (req, res, next) => {
         return user;
     })
     .then(user =>{
+
         for (const prop in req.body) {
             user[prop] = req.body[prop];
         }
@@ -115,12 +117,16 @@ exports.editUser = (req, res, next) => {
            bcrypt.hash(req.body.password, 10)
            .then(hash => {
                user.password = hash
-               user.save();
-               return res.status(200).json(user)
+               return user;
             })
        }else{
-           user.save();
-           return res.status(200).json(user);
+           return user
        }
     })
+    .then(user => {
+        user.save()
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(500).json({ error }));
+    })
+    
 }
