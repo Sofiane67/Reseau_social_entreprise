@@ -69,7 +69,7 @@ const Post = props => {
         dispatch(showModal({
             ...modalContent,
             type: "comment",
-            content: <FormPost action="add_comment"><ButtonsModal nameButton="Commenter"/> </FormPost>
+            content: <FormPost forum={props.pageType}  action="add_comment"><ButtonsModal nameButton="Commenter"/> </FormPost>
         }))
     }
 
@@ -122,7 +122,7 @@ const Post = props => {
                                 id: userIdComment,
                             } = comment.user;
 
-                            return <Comment key={comment.id} commentId={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
+                            return <Comment key={comment.id} forum={props.pageType} commentId={comment.id} userId={userIdComment} text={comment.text}><Author name={nameComment} firstName={firstNameComment} createdAt={createdAtComment} updatedAt={updatedAtComment} /></Comment>
                         })
                     }
                 </div>

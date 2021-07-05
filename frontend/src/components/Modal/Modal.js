@@ -22,7 +22,7 @@ const ModalOverlay = props => {
                 dispatch(deletePost(modal.forumId, modal.postId));
                 break;
             case "comment":
-                dispatch(deleteComment(modal.commentId));
+                dispatch(deleteComment(modal.commentId, modal.forumId));
                 break;
             case "account":
                 

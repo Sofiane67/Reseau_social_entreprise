@@ -35,10 +35,10 @@ const FormPost = props => {
                     dispatch(editPost(data, forum, postId));
                     break;
                 case "add_comment":
-                    dispatch(addComment(data, postId));
+                    dispatch(addComment(data,postId,forum));
                     break;
                 case "edit_comment":
-                    dispatch(editComment(data,commentId));
+                    dispatch(editComment(data,commentId, forum));
                     break;
                 default:
                     break;

@@ -13,11 +13,13 @@ const Comment = props => {
     const authorId = props.userId;
     const isAuthor = authorId === userId;
     const isModerator = user.roleId == 1;
+
     const modalContent = {
         isShow: true,
         nameButton: "",
         type: "comment",
         commentId: props.commentId,
+        forumId: props.forum,
         content: ""
     }
 

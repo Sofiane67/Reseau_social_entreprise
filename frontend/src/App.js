@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { getUserProfil } from "./redux/actions/user/actions";
 import Multimedia from "./pages/Multimedia/Multimedia";
 import Text from "./pages/Text/Text";
+import { SHOW_MODAL } from "./redux/actions/modal/types";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const App = () => {
 
     if(isLoggedIn){
         dispatch(getUserProfil(userId));
+        dispatch({ type: SHOW_MODAL, value: { isShow: false } });
     }
 
     return (
