@@ -43,7 +43,7 @@ const Page = props => {
                     <Button onClick={showModaHandler}>Ajouter un post</Button>
                 </Card>
             )}
-            <TemplateAllPosts />
+            <TemplateAllPosts pageType={forumId}/>
         </Fragment>
     )
 }

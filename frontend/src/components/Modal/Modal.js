@@ -14,7 +14,6 @@ const BackDrop = props => <div className={classes.backdrop} onClick={props.onBac
 
 const ModalOverlay = props => {
     const dispatch = useDispatch();
-    const store = useSelector(store => store);
     const modal = useSelector(store => store.modal);
     const history = useHistory();
     const confirmHandler = () => {

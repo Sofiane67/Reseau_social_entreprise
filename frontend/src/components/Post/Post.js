@@ -50,7 +50,7 @@ const Post = props => {
             ...modalContent,
             nameButton: "Supprimer",
             type: "post",
-            forumId,
+            forumId: props.pageType,
             postId,
             sql: "delete",
             content: "Confirmez vous la suppression du post ?"
@@ -61,7 +61,7 @@ const Post = props => {
         dispatch(showModal({
             ...modalContent,
             sql: "update",
-            content: <FormPost action="edit" ><ButtonsModal nameButton="Modifier" /> </FormPost>
+            content: <FormPost forum={props.pageType} action="edit" ><ButtonsModal nameButton="Modifier" /> </FormPost>
         }))
     }
 

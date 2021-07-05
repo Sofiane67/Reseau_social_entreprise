@@ -32,7 +32,7 @@ const FormPost = props => {
                     dispatch(addPost(data, forum));
                     break;
                 case "edit": 
-                    dispatch(editPost(data, forumId, postId));
+                    dispatch(editPost(data, forum, postId));
                     break;
                 case "add_comment":
                     dispatch(addComment(data, postId));
