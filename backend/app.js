@@ -63,8 +63,13 @@ let userId;
 app.use((req, res, next) => {
     if (typeof req.headers.authorization === "string"){
         const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, process.env.SECRET);
-        userId = decodedToken.userId;
+        jwt.verify(token, process.env.SECRET, (error, decode) => {
+            if (error) {
+                res.status(401).json({ error })
+            }else{
+                userId = decode.userId
+            }
+        });
     };
     next();
 });

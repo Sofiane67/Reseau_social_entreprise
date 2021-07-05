@@ -38,6 +38,9 @@ const App = () => {
                     <Route path="/logout">
                         <Redirect to="/" />
                     </Route>
+                    {
+                        !isLoggedIn && <Login/>
+                    }
                     <GuardedRoute path="/login" exact component={Login}/>
                     <GuardedRoute path="/signup" exact component={SignUp}/>
                     <GuardedRoute path="/home" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
