@@ -23,9 +23,16 @@
             grid-row: 2/4;
             align-self: start;
             
+            @include media-queries(map-get($breakpoints, bp-800)){
+                grid-column: col-start 4/col-end 6;
+                grid-row: 2/3;
+            }
+
             @include media-queries(map-get($breakpoints, bp-600)){
                 grid-column: center-start/center-end;
-                grid-row: 3/4;
+                grid-row: 2/3;
+                justify-self: normal;
+                margin: 0 1rem;
             }
         }
     }
@@ -35,6 +42,10 @@
         height: auto;
         overflow: hidden;
         position: relative;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            margin: 0 1rem;
+        }
     }
 
     & form{
@@ -44,14 +55,25 @@
     &__modal{
         text-align: center;
         position: fixed;
-        top: 20vh;
+        top:5vh;
         left: 50%;
         transform: translateX(-50%);
         padding: 3rem;
         z-index: 100;
         overflow: hidden;
-        min-width: 32rem;
+        min-width: 50rem;
         max-height: auto;
+        
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            margin: 0;
+            min-width: 100vw;
+            top: 0;
+            padding: 0;
+            height: auto;
+            border-radius: 0;
+        }
+
 
         & button{
             margin:0 1.5rem

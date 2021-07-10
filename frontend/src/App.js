@@ -24,6 +24,9 @@ const App = () => {
 
     if(isLoggedIn){
         dispatch(getUserProfil(userId));
+    }
+
+    if(!isLoggedIn){
         dispatch({ type: SHOW_MODAL, value: { isShow: false } });
     }
 
@@ -41,7 +44,7 @@ const App = () => {
                         <Redirect to="/" />
                     </Route>
                     {
-                        !isLoggedIn && <Login/>
+                        !isLoggedIn && <GuardedRoute path="/" exact component={Login}/>
                     }
                     <GuardedRoute path="/login" exact component={Login}/>
                     <GuardedRoute path="/signup" exact component={SignUp}/>

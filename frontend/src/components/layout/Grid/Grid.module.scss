@@ -7,5 +7,8 @@
     @include media-queries(map-get($breakpoints, bp-600)){
         grid-template-columns: [full-start] 0rem [center-start] 1fr [center-end] 0rem [full-end];
         grid-column-gap: 0;
+        justify-items: center;
     }
 }
+// Card_card__x7J3I Card_card__post__3IVKM
+// Card_card__x7J3I Card_card__post__3IVKM

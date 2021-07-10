@@ -53,8 +53,8 @@ const Comment = props => {
             {props.children}
             <div className={classes["comment__text-box"]}>
                 <p id={`comment-${props.commentId}`} className={classeText}>{props.text}</p>
-                {props.text.length >= 400 && <span className={`${classes["comment__action"]} ${classes["comment__action--learn-more"]}`} onClick={showMoreCommentHandler}>{nameBtnLearnMore}</span>}
             </div>
+            {props.text.length >= 400 && <span className={`${classes["comment__action"]} ${classes["comment__action--learn-more"]}`} onClick={showMoreCommentHandler}>{nameBtnLearnMore}</span>}
             {(isAuthor || isModerator) && (
                 <div className={classes["comment__action-box"]}>
                     {isAuthor && <span className={`${classes["comment__action"]} ${classes["comment__action--edit"]}`} onClick={showUpdateModalHander}>Modifier</span>}

@@ -1,8 +1,18 @@
+@import "../../sass/utils.scss";
+
 .post{
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
     &__text-box{
         border-radius: 1.5rem;
         padding: 3rem;
         height: auto;  
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            padding: 3rem 0;
+        }
     }
 
     &__text{
@@ -25,6 +35,9 @@
 
     &__img-box{
         height: 35rem;
+        @include media-queries(map-get($breakpoints, bp-600)){
+            height: auto;
+        }
     }
 
     &__img{
@@ -32,6 +45,14 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+
+        &--gif{
+            object-fit: fill;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            height: 20rem;
+        }
+        }
     }
 
     &__stat-post{
@@ -64,7 +85,11 @@
     &__comments{
         max-height: 40rem;
         transition: max-height .5s;
-        overflow-y: scroll;
+        padding-left: 10rem;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            padding-left: 5rem;
+        }
 
         &::-webkit-scrollbar-track{
             border-radius: 10px;

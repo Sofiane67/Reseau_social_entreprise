@@ -11,6 +11,7 @@ const SignUp = () => {
     const formIsSended = useSelector(store => store.formInputValue.isSend);
     const userDataStrored = useSelector(store => store.formInputValue);
     const isLoggedIn = useSelector(store => store.login.isLoggedIn);
+    const errorLogin = useSelector(state => state.formInputValue.error);
 
     useEffect(()=>{
         if(formIsSended){
@@ -28,9 +29,10 @@ const SignUp = () => {
     },[formIsSended, userDataStrored, dispatch]); 
 
     return(
-    <Form>
+        <Form className="form__logout">
         <FormUser/>
         <Button type="submit">Valider</Button>
+        <p>{errorLogin && errorLogin}</p>
     </Form>
     )
 }

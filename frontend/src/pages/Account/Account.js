@@ -48,17 +48,17 @@ const Account = () => {
             <AsideMenu className="card__home--aside-menu"/>
             <div className={classes.account}>
                 <h1>Mes informations</h1>
-                <Form>
+                <Form className="form__account">
                     <FormUser user={user} edit={update}/>
                     {error && <p>L'adresse email est déjà uilisée</p>}
                     {update && <Button type="submit">Valider</Button>}
                 </Form>
                 <div>
                     {!update && (
-                        <Fragment>
+                        <div className={classes["account__button-box"]}>
                             <Button onClick={showFieldsFormToUpdateHandler}>Modifier mon profil</Button>
                             <Button onClick={showDeleteModalHandler}>Supprimer mon compte</Button>
-                        </Fragment>
+                        </div>
                     )
                     }
                 </div>

@@ -1,12 +1,6 @@
 .icon{
-    &__icon-box{
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: translate(-100%, 100%);
-    }
-
     &__img{
-        height: 25px;
+        height: 2.5rem;
+        opacity: 0.5;
     }
 }

@@ -12,6 +12,12 @@
 
         &--column{
             flex-direction: column;
+
+            @include media-queries(map-get($breakpoints, bp-800)){
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+
         }
     }
 }

@@ -7,7 +7,7 @@ import Button from "../UI/Button/Button";
 import TemplateAllPosts from "../TemplateAllPosts/TemplateAllPosts";
 import { getAllPosts } from "../../redux/actions/posts/actions";
 import { showModal } from "../../redux/actions/modal/actions";
-
+import classes from "./Page.module.scss";
 
 
 const Page = props => {
@@ -39,9 +39,9 @@ const Page = props => {
     return (
         <Fragment>
             {forumId && (
-                <Card className="card__home--form">
-                    <Button onClick={showModaHandler}>Ajouter un post</Button>
-                </Card>
+                    <div className={classes["page__button"]}>
+                        <Button onClick={showModaHandler}>Ajouter un post</Button>
+                    </div>
             )}
             <TemplateAllPosts pageType={forumId}/>
         </Fragment>

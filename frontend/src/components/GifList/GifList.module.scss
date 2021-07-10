@@ -1,3 +1,5 @@
+@import "../../sass/utils.scss";
+
 .gif{
     padding: 1rem;
     margin: 1rem 0;
@@ -7,15 +9,20 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+
+    @include media-queries(map-get($breakpoints, bp-600)){
+       flex-direction: column;
+    }
     }
 
     &__input{
         height: 3rem;
         padding-left : 1rem;
+        border: solid 1px #777777;
     }
 
     &__content{
-        height: 15rem;
+        height: 10rem;
         overflow: hidden;
         overflow-y: scroll;
         display: grid;
@@ -23,6 +30,10 @@
         grid-auto-rows: 10rem;
         grid-gap: 1rem;
         margin-top: 1rem;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            grid-auto-rows: 5rem;
+        }
     }
 
     &__img-box{
@@ -39,6 +50,10 @@
     &__preview{
         height: 20rem;
         margin-top: 3rem;
+
+        @include media-queries(map-get($breakpoints, bp-600)){
+            height: 15rem;
+        }
     }
 
     &__preview-img{

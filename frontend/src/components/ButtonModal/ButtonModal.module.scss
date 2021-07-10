@@ -1,4 +1,10 @@
+@import "../../sass/utils.scss";
 .buttonModal{
     align-self: stretch;
     margin-top: 3rem;
+
+    @include media-queries(map-get($breakpoints, bp-600)){
+        display: flex;
+        justify-content: space-evenly;
+    }
 }

@@ -38,6 +38,11 @@ code {
 #root{
   min-height: 100vh;
   height: auto;
+  padding-bottom: 10rem;
 }
 
-
+@media only screen and (max-width:600px){
+  html{
+    /* font-size:55%  */
+  }
+}

@@ -1,3 +1,4 @@
+@import "../../../sass/utils.scss";
 .header{
     grid-column: full-start/full-end;
     display: flex;
@@ -8,11 +9,17 @@
 
     &--bg-white{
         background-color: #fff;
+        @include media-queries(map-get($breakpoints, bp-600)){
+            padding-bottom: 2rem;
+        }
     }
 
     &__logo-box{
         // width: 30rem;
         padding: 2rem 0;
+        @include media-queries(map-get($breakpoints, bp-600)){
+            text-align: center;
+        }
     }
 
     &__logo{

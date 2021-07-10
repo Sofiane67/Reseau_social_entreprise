@@ -9,9 +9,11 @@ import Comment from "../Comment/Comment";
 import Icon from "../Icon/Icon";
 import classes from "./Post.module.scss";
 import {showModal} from "../../redux/actions/modal/actions";
-
 import iconText from "../../images/icons/text-icon.svg";
 import iconMultimedia  from "../../images/icons/multimedia-icon.svg";
+import iconTrash from "../../images/icons/trash.svg";
+import iconEdit from "../../images/icons/edit.svg"
+import iconCom from "../../images/icons/com.svg";
 
 const Post = props => {
     
@@ -43,7 +45,13 @@ const Post = props => {
         forumId,
         postId,
         content: ""
+    };
+
+    let isGif;
+    if(typeof props.imageUrl == "string"){
+        isGif = props.imageUrl.includes(".gif");
     }
+ 
 
     const showDeleteModalHandler = e => {
         dispatch(showModal({
@@ -92,24 +100,25 @@ const Post = props => {
     return (
         <Fragment>
             <Card className="card__post">
-                <Icon icon={forumId == 1 ? iconMultimedia : iconText} />
-                <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt}/>
-                
+                <div className={classes["post__header"]}>
+                    <Author name={name} firstName={firstName} createdAt={createdAt} updatedAt={updatedAt} />
+                    <Icon icon={forumId == 1 ? iconMultimedia : iconText} />
+                </div>                
                 <div className={classes["post__text-box"]}>
                     <p id={`post-${postId}`} className={classeText}>{props.text}</p>
                     {props.text.length >= 400 && <span className={classes["post__learn-more"]} onClick={showMorePostHandler}>{nameBtnLearnMore}</span>}
                 </div>
                 {
-                    props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={classes["post__img"]} alt=""/></div>
+                    props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={`${classes["post__img"]} ${isGif ? classes["post__img--gif"]:""}`} alt=""/></div>
                 }
 
                 <div className={classes["post__stat-post"]}>
                     <span onClick={showAllCommentsHandler} className={classes["post__stat-comment"]}>{props.comments.length} commentaire{props.comments.length > 1 && "s"}</span>
                 </div>
                 <div className={classes["post__action"]}>
-                    <Button className="button__post" onClick={showCommentModalHandler}>Commenter</Button>
-                    {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}>Modifier</Button>}
-                    {(isAuthor || isModerator) && <Button className="button__post" onClick={showDeleteModalHandler}>Supprimer</Button>}
+                    <Button className="button__post" onClick={showCommentModalHandler}><Icon icon={iconCom} /></Button>
+                    {isAuthor && <Button className="button__post" onClick={showUpdateModalHander}><Icon icon={iconEdit} /></Button>}
+                    {(isAuthor || isModerator) && <Button className="button__post" onClick={showDeleteModalHandler}><Icon icon={iconTrash} /></Button>}
                 </div>
                 <div id={`comments-${postId}`} className={`${classes["post__comments--hidden"]}`}>
                     {

@@ -34,7 +34,7 @@ const Login = () => {
     }, [formIsSended, loginState, dispatch, history, isLoggedIn]);
 
     return (
-        <Form>
+        <Form className="form__logout">
             <FormGroup field={formFieldLogin.email}>
                 <Input field={formFieldLogin.email} action={GET_EMAIL} />
             </FormGroup>
