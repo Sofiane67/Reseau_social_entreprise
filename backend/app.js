@@ -11,7 +11,6 @@ const User = require("./models/user");
 const Forum = require("./models/forum");
 const Post = require("./models/post");
 const Comment = require("./models/comment");
-const Sharing = require("./models/sharing");
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
@@ -93,9 +92,6 @@ User.belongsTo(Role);
 //un User peut publier plusieurs Posts
 User.hasMany(Post, { onDelete: "cascade" });
 Post.belongsTo(User, { foreignKey: "userId" });
-//un User peut partager plusieurs Post et un Post peut être partagé plusieurs fois
-User.belongsToMany(Post, {through: Sharing});
-
 
 User.hasMany(Comment, { onDelete: "cascade"});
 Comment.belongsTo(User, {foreignKey:"userId"});

@@ -11,7 +11,11 @@ const Post = sequelize.define("post", {
     },
     text: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notNull: true,
+            notEmpty: true,
+        }
     },
     imageUrl: {
         type: DataTypes.STRING,

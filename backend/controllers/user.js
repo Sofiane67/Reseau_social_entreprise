@@ -13,13 +13,23 @@ require("dotenv").config();
  */
 exports.signup = (req, res, next) => {
     const { name, firstName, email, password} = req.body;
+    
     bcrypt.hash(password, 10)
     .then(hash => {
-        
+        if(!name){
+            return res.status(500).json({ error: { errors: [{ message: "Le nom n'est pas renseigné" }] } });
+        }else if(!firstName){
+            return res.status(500).json({ error: { errors: [{ message: "Le prénom n'est pas renseigné" }] } });
+        }else if(!email){
+            return res.status(500).json({ error: { errors: [{ message: "L'email n'est pas renseigné" }] } });
+        }else if(!password){
+            return res.status(500).json({ error: { errors: [{ message: "Le mot de passe n'est pas renseigné" }] } });
+        }
+
         User.create({
-            name,
-            firstName,
-            email,
+            name: name.trim(),
+            firstName: firstName.trim(),
+            email: email.trim(),
             password: hash,
             roleId: 2
         })

@@ -12,22 +12,38 @@ const User = sequelize.define("user", {
     name: {
         type : DataTypes.STRING(15),
         allowNull: false,
-        isAlpha: true
+        validate: {
+            notNull: true,  
+            notEmpty: true,
+            is: /^[A-Za-z ]+$/
+        }
     },
     firstName: {
         type: DataTypes.STRING(15),
         allowNull: false,
-        isAlpha: true
+        validate: {
+            notNull: true,
+            notEmpty: true,
+            is: /^[A-Za-z ]+$/
+        }
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        isEmail: true,
+        validate: {
+            notNull: true,
+            notEmpty: true,
+            isEmail: true,
+        },
         unique : true
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notNull: true,
+            notEmpty: true
+        }
     }
 });
 
