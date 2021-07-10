@@ -15,13 +15,11 @@ const useInput = (action) => {
     };
 
     useEffect(() => {
-        const timer = setTimeout(() => dispatch({type: action, value: inputValue}), 500);
-        
+         dispatch({type: action, value: inputValue});
         if(formIsSended){
             setInputValue("");
         }
 
-        return () => clearTimeout(timer);
     }, [action, dispatch, inputValue, formIsSended]);
 
     return {

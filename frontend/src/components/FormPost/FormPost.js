@@ -65,12 +65,12 @@ const FormPost = props => {
                 <div>                    
                     <div>
                         {
-                            !showImageField && <span className={classes["formPost__add-image-btn"]} onClick={showImageFieldHandler}>Ajouter image</span>
+                        (!showImageField && modal.type != "comment") && <span className={classes["formPost__add-image-btn"]} onClick={showImageFieldHandler}>Ajouter image</span>
                         }
                         {
                             forum == 1 && (
                                 <Fragment>
-                                    {!showGifList && <span className={classes["button-add-multimedia"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
+                                    {(!showGifList && modal.type != "comment") && <span className={classes["button-add-multimedia"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
                                 </Fragment>
                             )
                         }
