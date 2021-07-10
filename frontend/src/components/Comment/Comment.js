@@ -61,7 +61,6 @@ const Comment = props => {
                     <span className={`${classes["comment__action"]} ${classes["comment__action--delete"]}`} onClick={showDeleteModalHandler}>Supprimer</span>
                 </div>
             )}
-            
         </div>  
     )
 }

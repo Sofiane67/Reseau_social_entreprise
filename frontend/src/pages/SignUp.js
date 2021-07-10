@@ -4,6 +4,7 @@ import Form from "../components/Form/Form";
 import FormUser from "../components/FormUser/FormUser";
 import Button from "../components/UI/Button/Button";
 import { signup } from "../redux/actions/form/actions";
+import FeedBack from "../components/FeedBack/FeedBack";
 
 const SignUp = () => {
 
@@ -11,7 +12,7 @@ const SignUp = () => {
     const formIsSended = useSelector(store => store.formInputValue.isSend);
     const userDataStrored = useSelector(store => store.formInputValue);
     const isLoggedIn = useSelector(store => store.login.isLoggedIn);
-    const errorLogin = useSelector(state => state.formInputValue.error);
+    const feedBack = useSelector(store => store.feedBack);
 
     useEffect(()=>{
         if(formIsSended){
@@ -32,7 +33,9 @@ const SignUp = () => {
         <Form className="form__logout">
         <FormUser/>
         <Button type="submit">Valider</Button>
-        <p>{errorLogin && errorLogin}</p>
+        {
+                feedBack.message && <FeedBack message={feedBack.message} status={feedBack.status}/>
+        }
     </Form>
     )
 }

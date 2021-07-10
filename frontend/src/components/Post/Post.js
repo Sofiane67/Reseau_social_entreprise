@@ -14,12 +14,15 @@ import iconMultimedia  from "../../images/icons/multimedia-icon.svg";
 import iconTrash from "../../images/icons/trash.svg";
 import iconEdit from "../../images/icons/edit.svg"
 import iconCom from "../../images/icons/com.svg";
+import FeedBack from "../FeedBack/FeedBack";
 
 const Post = props => {
     
     const dispatch = useDispatch();
     const userId = useSelector(store => store.login.userId);
     const user = useSelector(store => store.user);
+    const feedBack = useSelector(store => store.feedBack);
+
     const [nameBtnLearnMore, setNameBtnLearnMore] = useState("Afficher plus");
     const {
         name,
@@ -136,6 +139,9 @@ const Post = props => {
                     }
                 </div>
             </Card>
+            {
+                feedBack.message && <FeedBack message={feedBack.message} status={feedBack.status}/>
+            }
         </Fragment>
     )
 }

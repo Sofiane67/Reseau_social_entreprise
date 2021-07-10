@@ -33,7 +33,7 @@ exports.signup = (req, res, next) => {
             password: hash,
             roleId: 2
         })
-        .then(() => res.status(201).json({message : "Utilisateur créé"}))
+        .then(() => res.status(201).json({message : "Votre compte a bien été créé"}))
         .catch(error => res.status(500).json({error}))
     })
 };
@@ -97,7 +97,7 @@ exports.deleteUser = (req, res, next) => {
         });
         return user.destroy()
     })
-    .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
+    .then(() => res.status(200).json({ message: "Compte supprimé" }))
     .catch(error => res.status(400).json({ error }));
 }
 
@@ -135,7 +135,7 @@ exports.editUser = (req, res, next) => {
     })
     .then(user => {
         user.save()
-        .then(user => res.status(200).json(user))
+            .then(user => res.status(200).json({ message: "Profil modifié"}))
         .catch(error => res.status(500).json({ error }));
     })
     

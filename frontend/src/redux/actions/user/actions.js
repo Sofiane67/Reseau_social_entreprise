@@ -29,6 +29,7 @@ export const deleteUser = userId => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "DELETE");
         response().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch({ type: LOGOUT})
             dispatch({ type: FORM_IS_SENDED, isSend: false });
             dispatch({ type: SHOW_MODAL, value: { isShow: false } });
@@ -46,6 +47,7 @@ export const editUser = (user, userId) => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "PUT", user);
         response().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch({ type: EDIT_USER, value: res.data});
             if (res.error) {
                 dispatch({ type: ERROR, message: res.error.errors[0].message })
@@ -55,6 +57,8 @@ export const editUser = (user, userId) => {
             if (error.name == "TokenExpiredError") {
                 dispatch({ type: LOGOUT });
                 dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+            }else {
+                dispatch({ type: "ERROR", message: error.errors[0].message, status:"error" })
             }
         });
 

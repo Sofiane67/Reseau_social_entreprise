@@ -6,3 +6,4 @@ export const GET_POST_TEXT = "GET_POST_TEXT";
 export const GET_POST_IMAGE = "GET_POST_IMAGE";
 export const FORM_IS_SENDED = "FORM_IS_SENDED";
 export const ERROR = "ERROR";
+export const INIT_FORM = "INIT_FORM";

@@ -1,6 +1,5 @@
 import {httpRequest} from "../../../utils/httpRequest";
 import {LOGIN} from "./types";
-import {ERROR} from "../form/type";
 import { FORM_IS_SENDED } from "../form/type";
 
 export const login = userDataConnect => {
@@ -22,7 +21,7 @@ export const login = userDataConnect => {
                 }
             });
         }).catch(error => {
-            dispatch({type: ERROR, message: error.message})
+            dispatch({type: "ERROR", message: error.message, status:"error"})
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
     }

@@ -41,6 +41,10 @@ code {
   padding-bottom: 10rem;
 }
 
+.bg-gray{
+  background-color: #f2f2f2;
+}
+
 @media only screen and (max-width:600px){
   html{
     /* font-size:55%  */

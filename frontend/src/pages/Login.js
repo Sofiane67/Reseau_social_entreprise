@@ -8,15 +8,14 @@ import Button from "../components/UI/Button/Button";
 import { formFieldLogin} from "../utils/formFields";
 import { GET_EMAIL, GET_PASSWORD } from "../redux/actions/form/type";
 import {login} from "../redux/actions/login/actions";
-
+import FeedBack from "../components/FeedBack/FeedBack";
 
 const Login = () => {
     const history = useHistory();
     const loginState = useSelector(state => state.formInputValue);
     const formIsSended = useSelector(state => state.formInputValue.isSend);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
-    const errorLogin = useSelector(state => state.formInputValue.error);
-    
+    const feedBack = useSelector(store => store.feedBack);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -42,7 +41,9 @@ const Login = () => {
                 <Input field={formFieldLogin.password} action={GET_PASSWORD} />
             </FormGroup>
             <Button type="submit">Valider</Button>
-            <p>{errorLogin && errorLogin}</p>
+            {
+                feedBack.message && <FeedBack message={feedBack.message} status={feedBack.status}/>
+            }
         </Form>
     );
 };

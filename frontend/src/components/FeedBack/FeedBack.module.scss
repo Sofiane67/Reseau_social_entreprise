@@ -1,0 +1,59 @@
+.feedback{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3rem;
+    
+    font-weight: 600;
+    
+    width: 30rem;
+    text-align: center;
+    animation: moveInBottom 1s;
+
+    &--error{
+        background-color: #F5B7B1;
+    }
+
+    &--success{
+        background-color: #A9DFBF;
+    }
+
+    &__message{
+        &--error{
+            color: #E74C3C;
+        }
+        &--success{
+            color: #229954;
+        }
+        
+    }
+}
+
+@keyframes moveInBottom{
+    0%{
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+    }
+
+    100%{
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes moveInTop{
+    0%{
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    100%{
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+    }
+}

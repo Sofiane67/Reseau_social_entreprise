@@ -6,11 +6,11 @@ import { SHOW_MODAL } from "../modal/types";
 import { LOGOUT } from "../login/types";
 
 export const addComment = (comment,postId, forumId) => {
-    console.log(forumId)
     return dispatch => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${postId}`, "POST", comment);
         response().then(res => {
             if(!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
             if (res.error) {
                 dispatch({ type: ERROR, message: res.error.errors[0].message })
@@ -19,6 +19,8 @@ export const addComment = (comment,postId, forumId) => {
         .catch(error => {
             if (error.name == "TokenExpiredError") {
                 dispatch({ type: LOGOUT })
+            }else{
+                dispatch({ type: ERROR, message: error.errors[0].message, status:"error" })
             }
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
@@ -31,7 +33,9 @@ export const editComment = (comment, commentId, forumId) => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${commentId}`, "PUT", comment);
         response().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" });
             dispatch(getAllPosts(forumId));
+            
             if (res.error) {
                 dispatch({ type: ERROR, message: res.error.errors[0].message })
             }
@@ -51,6 +55,7 @@ export const deleteComment = (commentId, forumId) => {
         const res = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/comments/${commentId}`, "DELETE");
         res().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
             dispatch({ type: SHOW_MODAL, value: { isShow: false } })
         })

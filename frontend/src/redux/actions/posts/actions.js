@@ -31,14 +31,14 @@ export const addPost = (post, forumId) => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}`, "POST", post);
         response().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
-            if (res.error) {
-                dispatch({ type: ERROR, message: res.error.errors[0].message })
-            }
         })
         .catch(error => {
             if (error.name == "TokenExpiredError") {
                 dispatch({ type: LOGOUT })
+            }else{
+                dispatch({ type: "ERROR", message: error.errors[0].message, status:"error" })
             }
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
@@ -51,6 +51,7 @@ export const editPost = (post,forumId, postId) => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}/${postId}`, "PUT", post);
         response().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
             if (res.error) {
                 dispatch({ type: ERROR, message: res.error.errors[0].message })
@@ -71,6 +72,7 @@ export const deletePost = (forumId, postId) => {
         const res = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/posts/${forumId}/${postId}`, "DELETE");
         res().then(res => {
             if (!res.status) throw res.error;
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
             dispatch({type: SHOW_MODAL, value: {isShow: false}})
         })

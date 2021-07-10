@@ -7,14 +7,15 @@ import Button from "../../components/UI/Button/Button";
 import classes from "./Account.module.scss";
 import {showModal} from "../../redux/actions/modal/actions";
 import { editUser } from "../../redux/actions/user/actions";
+import FeedBack from "../../components/FeedBack/FeedBack";
 
 const Account = () => {
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
     const formIsSend = useSelector(store => store.formInputValue.isSend);
     const userDataStrored = useSelector(store => store.formInputValue);
-    const error = useSelector(store => store.formInputValue.error);
     const [update, setUpdate] = useState(false);
+    const feedBack = useSelector(store => store.feedBack);
 
     useEffect(() => {
         if (formIsSend) {
@@ -50,7 +51,6 @@ const Account = () => {
                 <h1>Mes informations</h1>
                 <Form className="form__account">
                     <FormUser user={user} edit={update}/>
-                    {error && <p>L'adresse email est déjà uilisée</p>}
                     {update && <Button type="submit">Valider</Button>}
                 </Form>
                 <div>
@@ -63,7 +63,9 @@ const Account = () => {
                     }
                 </div>
             </div>
-            
+            {
+                feedBack.message && <FeedBack message={feedBack.message} status={feedBack.status}/>
+            }
         </Fragment>
     )
 }
