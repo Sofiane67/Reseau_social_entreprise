@@ -49,12 +49,12 @@ const App = () => {
                     }
                     <GuardedRoute path="/login" exact component={Login}/>
                     <GuardedRoute path="/signup" exact component={SignUp}/>
+                    <GuardedRoute path="/home" exact component={Home} />
                     <GuardedRoute path="/home" exact component={Login} guards={[requireLogin]} meta={{ auth: false }} />
                     <GuardedRoute path="/multimedia" exact component={Multimedia} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/text" exact component={Text} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/account" exact component={Account} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/account" exact component={SignUp} guards={[requireLogin]} meta={{ auth: false }} />
-                    <GuardedRoute path="/" exact component={Home} guards={[requireLogin]} meta={{ auth: true }} />
                     <GuardedRoute path="/" exact component={Login} guards={[requireLogin]} meta={{ auth: false }}/>
                 </Switch>
             </GuardProvider>

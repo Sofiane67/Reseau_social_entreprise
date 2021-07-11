@@ -28,7 +28,7 @@ const Login = () => {
         }; 
 
         if(isLoggedIn){
-            history.push("/")
+            history.push("/home")
         }
     }, [formIsSended, loginState, dispatch, history, isLoggedIn]);
 
