@@ -43,6 +43,7 @@ const Account = () => {
     }
 
     const showFieldsFormToUpdateHandler = () =>  setUpdate(true);
+    const hideForm = () => setUpdate(false);
     
     return (
         <Fragment>
@@ -51,7 +52,12 @@ const Account = () => {
                 <h1>Mes informations</h1>
                 <Form className="form__account">
                     <FormUser user={user} edit={update}/>
-                    {update && <Button type="submit">Valider</Button>}
+                    {update && (
+                        <div className={classes["account__form-btn-box"]}>
+                            <Button type="submit">Valider</Button>
+                            <span className={classes["account__cancel-btn"]} onClick={hideForm}>Annuler</span>
+                        </div>
+                    )}
                 </Form>
                 <div>
                     {!update && (

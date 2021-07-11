@@ -26,4 +26,15 @@
             }
         }
     }
+
+    &__cancel-btn{
+        background-color: #aca7a7;
+        padding: 1rem;
+        border-radius: .5rem;
+        color: #fff;
+        margin-left: 2rem;
+        &:hover{
+            background-color: lighten(#aca7a7, 5%);
+        }
+    }
 }
