@@ -28,7 +28,7 @@ const App = () => {
     }
 
     if(!isLoggedIn){
-        dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
     }
 
     return (

@@ -19,6 +19,6 @@ export const modal = (state = initialState, action) => {
         default:
             return state;
     }
-    
+    console.log(newState)
     return newState;
 };

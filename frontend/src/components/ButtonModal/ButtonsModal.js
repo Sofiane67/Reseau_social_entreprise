@@ -6,7 +6,7 @@ import { SHOW_MODAL } from "../../redux/actions/modal/types";
 const ButtonsModal = props => {
     const dispatch = useDispatch();
     const cancelDeleteHandler = () => {
-        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql:"" } })
+        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null} })
     }
 
     return (

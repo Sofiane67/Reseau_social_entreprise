@@ -1,13 +1,10 @@
 .formPost{
-    &__btn-box{
-        display: flex;
-        justify-content: space-evenly;
-    }
     &__add-file{
         display: inline-block;
         align-self: stretch;
         padding: 1rem;
         background-color: lightcoral;
         color: #fff;
+        margin: 0 1rem;
     }
 }

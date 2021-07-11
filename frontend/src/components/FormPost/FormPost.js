@@ -62,26 +62,29 @@ const FormPost = props => {
                 <FormGroup>
                     <Textarea field={formFieldPost.text} rows={props.rowSize ?? 12} cols="60" action={GET_POST_TEXT}/>
                 </FormGroup>
-                <div>                    
-                    <div className={classes["formPost__btn-box"]}>
-                        {
-                        (!showImageField && modal.type != "comment") && <span className={classes["formPost__add-file"]} onClick={showImageFieldHandler}>Ajouter image</span>
-                        }
-                        {
-                            forum == 1 && (
-                                <Fragment>
-                                {(!showGifList && modal.type != "comment") && <span className={classes["formPost__add-file"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
-                                </Fragment>
-                            )
-                        }
-                        {
-                            showGifList && <GifList/>
-                        }
-                        {
-                            showImageField && <ImageUrlField/>
-                        }
+                { modal.type != "comment" && (
+                    <div>
+                        <div className={classes["formPost__btn-box"]}>
+                            {
+                                !showImageField && <span className={classes["formPost__add-file"]} onClick={showImageFieldHandler}>Ajouter image</span>
+                            }
+                            {
+                                forum == 1 && (
+                                    <Fragment>
+                                        {!showGifList && <span className={classes["formPost__add-file"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
+                                    </Fragment>
+                                )
+                            }
+                            {
+                                showGifList && <GifList/>
+                            }
+                            {
+                                showImageField && <ImageUrlField/>
+                            }
+                        </div>
                     </div>
-                </div>
+                )
+                }
                 
 
                 {props.children}

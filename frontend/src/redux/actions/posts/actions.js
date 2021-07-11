@@ -42,7 +42,7 @@ export const addPost = (post, forumId) => {
             }
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
-        dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
     }
 }
 
@@ -63,7 +63,7 @@ export const editPost = (post,forumId, postId) => {
             }
         });
         dispatch({ type: FORM_IS_SENDED, isSend: false });
-        dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
     }
 };
 
@@ -74,7 +74,7 @@ export const deletePost = (forumId, postId) => {
             if (!res.status) throw res.error;
             dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch(getAllPosts(forumId));
-            dispatch({type: SHOW_MODAL, value: {isShow: false}})
+            dispatch({type: SHOW_MODAL, value: {isShow: false, sql:null}})
         })
             .catch(error => {
                 if (error.name == "TokenExpiredError") {

@@ -32,7 +32,7 @@ export const deleteUser = userId => {
             dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
             dispatch({ type: LOGOUT})
             dispatch({ type: FORM_IS_SENDED, isSend: false });
-            dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+            dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
         })
         .catch(error => {
             if (error.name == "TokenExpiredError") {
@@ -60,13 +60,13 @@ export const editUser = (user, userId) => {
         .catch(error => {
             if (error.name == "TokenExpiredError") {
                 dispatch({ type: LOGOUT });
-                dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+                dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
             }else {
                 dispatch({ type: "ERROR", message: error.errors[0].message, status:"error" })
             }
         });
 
         dispatch({ type: FORM_IS_SENDED, isSend: false });
-        dispatch({ type: SHOW_MODAL, value: { isShow: false } });
+        dispatch({ type: SHOW_MODAL, value: { isShow: false, sql: null } });
     }
 }
