@@ -135,7 +135,7 @@ exports.editUser = (req, res, next) => {
     })
     .then(user => {
         user.save()
-            .then(user => res.status(200).json({ message: "Profil modifié"}))
+        .then(user => res.status(200).json({user, message: "Profil modifié"}))
         .catch(error => res.status(500).json({ error }));
     })
     

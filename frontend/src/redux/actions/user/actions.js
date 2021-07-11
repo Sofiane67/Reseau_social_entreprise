@@ -47,7 +47,11 @@ export const editUser = (user, userId) => {
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/${userId}`, "PUT", user);
         response().then(res => {
             if (!res.status) throw res.error;
-            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" })
+            dispatch({ type: "SUCCESS", message: res.data.message, status: "success" });
+            dispatch({
+                type: GET_USER_DATA,
+                value: res.data.user
+            })
             dispatch({ type: EDIT_USER, value: res.data});
             if (res.error) {
                 dispatch({ type: ERROR, message: res.error.errors[0].message })
