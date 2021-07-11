@@ -63,14 +63,14 @@ const FormPost = props => {
                     <Textarea field={formFieldPost.text} rows={props.rowSize ?? 12} cols="60" action={GET_POST_TEXT}/>
                 </FormGroup>
                 <div>                    
-                    <div>
+                    <div className={classes["formPost__btn-box"]}>
                         {
-                        (!showImageField && modal.type != "comment") && <span className={classes["formPost__add-image-btn"]} onClick={showImageFieldHandler}>Ajouter image</span>
+                        (!showImageField && modal.type != "comment") && <span className={classes["formPost__add-file"]} onClick={showImageFieldHandler}>Ajouter image</span>
                         }
                         {
                             forum == 1 && (
                                 <Fragment>
-                                    {(!showGifList && modal.type != "comment") && <span className={classes["button-add-multimedia"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
+                                {(!showGifList && modal.type != "comment") && <span className={classes["formPost__add-file"]} onClick={showGifListdHandler}>Ajouter un GIF</span>}
                                 </Fragment>
                             )
                         }

@@ -1,4 +1,4 @@
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route, Redirect, useHistory} from "react-router-dom";
 import {GuardedRoute, GuardProvider} from "react-router-guards"
 import {requireLogin} from "./guards/required-login";
 import Grid from "./components/layout/Grid/Grid";
@@ -21,6 +21,7 @@ const App = () => {
     const modalIsShow = useSelector(store => store.modal.isShow);
     const login = useSelector(store => store.login);
     const {isLoggedIn, userId} = login;
+    const history = useHistory();
 
     if(isLoggedIn){
         dispatch(getUserProfil(userId));
@@ -44,7 +45,7 @@ const App = () => {
                         <Redirect to="/" />
                     </Route>
                     {
-                        !isLoggedIn && <GuardedRoute path="/" exact component={Login}/>
+                        !isLoggedIn && history.push("/")
                     }
                     <GuardedRoute path="/login" exact component={Login}/>
                     <GuardedRoute path="/signup" exact component={SignUp}/>
