@@ -2,7 +2,6 @@ import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FormPost from "../FormPost/FormPost";
 import ButtonsModal from "../ButtonModal/ButtonsModal";
-import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 import TemplateAllPosts from "../TemplateAllPosts/TemplateAllPosts";
 import { getAllPosts } from "../../redux/actions/posts/actions";
@@ -43,7 +42,7 @@ const Page = props => {
                         <Button onClick={showModaHandler}>Ajouter un post</Button>
                     </div>
             )}
-            <TemplateAllPosts pageType={forumId}/>
+            <TemplateAllPosts pageType={forumId} rowSize={props.rowSize}/>
         </Fragment>
     )
 }

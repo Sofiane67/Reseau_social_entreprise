@@ -72,7 +72,7 @@ const Post = props => {
         dispatch(showModal({
             ...modalContent,
             sql: "update",
-            content: <FormPost forum={props.pageType} action="edit" ><ButtonsModal nameButton="Modifier" /> </FormPost>
+            content: <FormPost forum={props.pageType} rowSize={props.rowSize} action="edit" ><ButtonsModal nameButton="Modifier" /> </FormPost>
         }))
     }
 

@@ -11,7 +11,7 @@ const TemplateAllPosts = props => {
             <AsideMenu className="card__home--aside-menu" />
             <div className={classes["templateAllPosts__post-list"]}>
                 {
-                    posts.map(post => <Post key={post.id} pageType={props.pageType} text={post.text} imageUrl={post.imageUrl} author={post.user} forum={post.forumId} id={post.id} comments={post.comments} />)
+                    posts.map(post => <Post key={post.id} pageType={props.pageType} rowSize={props.rowSize} text={post.text} imageUrl={post.imageUrl} author={post.user} forum={post.forumId} id={post.id} comments={post.comments} />)
                 }
             </div>
         </Fragment>
