@@ -4,7 +4,7 @@ import classes from "./FeedBack.module.scss";
 
 const FeedBack = props => {
     const dispatch = useDispatch();
-    const error = useSelector(store => store.error);
+
     useEffect(() => {
         const timer = setTimeout(() => dispatch({ type: "INIT_FEEDBACK" }) ,2500);
         return () => clearTimeout(timer)

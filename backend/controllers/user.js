@@ -12,7 +12,7 @@ require("dotenv").config();
  * @param {*} next 
  */
 exports.signup = (req, res, next) => {
-    const { name, firstName, email, password} = req.body;
+    const { name, firstName, email, password, roleId} = req.body;
     
     bcrypt.hash(password, 10)
     .then(hash => {
@@ -31,7 +31,7 @@ exports.signup = (req, res, next) => {
             firstName: firstName.trim(),
             email: email.trim(),
             password: hash,
-            roleId: 2
+            roleId
         })
         .then(() => res.status(201).json({message : "Votre compte a bien été créé"}))
         .catch(error => res.status(500).json({error}))

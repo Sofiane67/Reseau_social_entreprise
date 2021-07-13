@@ -3,6 +3,7 @@ import {FORM_IS_SENDED, ERROR} from "./type";
 
 export const signup = user => {
     return dispatch =>{
+        user.roleId = 2;
         const response = httpRequest(`${process.env.REACT_APP_DOMAIN}/api/auth/signup`, "POST", user);
         response().then(data => {
             if(data.error){

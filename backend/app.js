@@ -35,18 +35,13 @@ const limiter = rateLimit({
 //Définit des en-tête HTTP sécurisés
 app.use(helmet());
 
-// app.use("/", limiter);
+app.use("/", limiter);
 
 app.use(express.json());
 
 //Protection contre les attaques XSS
 app.use(xssClean());
 
-
-
-//****************************************************************************************************************************
-        //A SUPPRIMER EN PROD
-//****************************************************************************************************************************
 app.post("/api/forum", (req, res, next) => {
     const forumType = req.body.forumType;
     Forum.create({forumType}).then(() => res.status(201).json({message: "nouveau forum créé"})).catch(err => res.status(500).json({err}))
@@ -55,9 +50,8 @@ app.post("/api/forum", (req, res, next) => {
 app.post("/api/role", (req, res, next) => {
     const roleName = req.body.roleName;
     Role.create({ roleName }).then(() => res.status(201).json({ message: "nouveau role créé" })).catch(err => res.status(500).json({ err }))
-})
-//****************************************************************************************************************************
-//****************************************************************************************************************************
+});
+
 let userId;
 app.use((req, res, next) => {
     if (typeof req.headers.authorization === "string"){
