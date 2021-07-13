@@ -86,6 +86,7 @@
         max-height: 40rem;
         transition: max-height .5s;
         padding-left: 10rem;
+        overflow-y: scroll;
 
         @include media-queries(map-get($breakpoints, bp-600)){
             padding-left: 5rem;
