@@ -33,9 +33,9 @@ const GifList = () => {
             </div>
 
             <div className={classes["gif__content"]}>
-                {tenor.map(gif => <div key={gif.id} className={classes["gif__img-box"]}><img className={classes["gif__img"]} src={gif.media[0].tinygif.url} onClick={getSrcUrlHandler} /></div>)}
+                {tenor.map(gif => <div key={gif.id} className={classes["gif__img-box"]}><img className={classes["gif__img"]} src={gif.media[0].tinygif.url} onClick={getSrcUrlHandler} alt="image gif"/></div>)}
             </div>
-            {gifUrl && <div className={classes["gif__preview"]}><img className={classes["gif__preview-img"]} src={gifUrl} /></div>}
+            {gifUrl && <div className={classes["gif__preview"]}><img className={classes["gif__preview-img"]} src={gifUrl} alt="prévisualisation gif"/></div>}
         </div>
     )
 }

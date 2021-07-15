@@ -112,7 +112,7 @@ const Post = props => {
                     {props.text.length >= 400 && <span className={classes["post__learn-more"]} onClick={showMorePostHandler}>{nameBtnLearnMore}</span>}
                 </div>
                 {
-                    props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={`${classes["post__img"]} ${isGif ? classes["post__img--gif"]:""}`} alt=""/></div>
+                    props.imageUrl && <div className={classes["post__img-box"]}><img src={props.imageUrl} className={`${classes["post__img"]} ${isGif ? classes["post__img--gif"]:""}`} alt="image post"/></div>
                 }
 
                 <div className={classes["post__stat-post"]}>
