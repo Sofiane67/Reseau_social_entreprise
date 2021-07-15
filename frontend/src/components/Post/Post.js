@@ -27,15 +27,15 @@ const Post = props => {
     const {
         name,
         firstName,
-        createdAt,
-        updatedAt,
         id: authorId
     } = props.author;
 
     const {
         forum: forumId,
         id: postId,
-        comments
+        comments,
+        createdAt,
+        updatedAt,
     } = props;
 
     const isAuthor = authorId === userId;

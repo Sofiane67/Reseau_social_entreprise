@@ -1,5 +1,5 @@
 import classes from "./Author.module.scss";
-import { dateFormat } from "../../utils/funcsHelper";
+import { dateFormat, timeFormat} from "../../utils/funcsHelper";
 
 const Author = props => {
 
@@ -9,7 +9,6 @@ const Author = props => {
         createdAt,
         updatedAt
     } = props;
-
     return(
         <div className={classes["author"]}>
             <div className={classes["author__avatar-box"]}>
@@ -18,8 +17,7 @@ const Author = props => {
             <div className={classes["author__info"]}>
                 <p className={classes["author__author"]}>{`${firstName} ${name}`}</p>
                 <p className={classes["author__date"]}>
-                    <span>Créé le {dateFormat(createdAt)}</span>
-                    {updatedAt !== createdAt && `Modifié le ${dateFormat(updatedAt)}`}
+                    <span>Créé le {dateFormat(createdAt)} à {timeFormat(createdAt)}{updatedAt !== createdAt && ` - Modifié le ${dateFormat(updatedAt)} à  ${timeFormat(updatedAt)}`} </span>
                 </p>
             </div>
         </div>
